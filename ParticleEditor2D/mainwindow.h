@@ -9,6 +9,8 @@ class Camera3D;
 class Viewport3D;
 class ContextNavigation3D;
 
+class NodeViewer;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -26,5 +28,8 @@ private:
     Camera3D *m_camera3D;
     Viewport3D *m_viewport3D;
     ContextNavigation3D *m_contextNavigation3D;
+
+private:
+    NodeViewer *m_nodeViewer;
 };
 #endif // MAINWINDOW_H
