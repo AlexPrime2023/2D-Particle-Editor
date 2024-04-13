@@ -3,8 +3,8 @@
 
 #include <QWidget>
 
-#include <QListView>
-#include <QStringListModel>
+class QListView;
+class QStringListModel;
 
 class NodeViewer : public QWidget
 {

@@ -1,5 +1,8 @@
 #include "nodeviewer.h"
 
+#include <QListView>
+#include <QStringListModel>
+
 #include <QVBoxLayout>
 #include <QMenu>
 #include <QMouseEvent>
