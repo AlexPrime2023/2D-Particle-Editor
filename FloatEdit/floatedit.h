@@ -20,6 +20,7 @@ public:
     void setRange(float min, float max);
 
     void setIncrement(float increment);
+    float increment() const;
 
     QSize sizeHint() const override;
 protected:

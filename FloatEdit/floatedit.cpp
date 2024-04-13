@@ -68,7 +68,12 @@ QSize FloatEdit::sizeHint() const
 
 void FloatEdit::setIncrement(float increment)
 {
-    this->m_increment = increment;
+    m_increment = increment;
+}
+
+float FloatEdit::increment() const
+{
+    return m_increment;
 }
 
 void FloatEdit::keyPressEvent(QKeyEvent *event)
