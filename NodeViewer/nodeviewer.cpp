@@ -9,7 +9,8 @@
 
 #include <QJsonArray>
 
-NodeViewer::NodeViewer(QWidget *parent) :
+NodeViewer::NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent) :
+    m_nodesAndIds(std::move(nodesAndIds)),
     QWidget(parent)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -20,21 +21,22 @@ NodeViewer::NodeViewer(QWidget *parent) :
 
     m_model = new QStringListModel({}, this);
     m_listView->setModel(m_model);
-
-    m_nodeNames = QStringList({"Life Time", "Emittios Rate", "Start Transformation", "Max Prticles", "Emitter Shape", "Force By Time", "Particle Speed", "Particle Rotation Speed", "Particle Size", "Particle Color", "Particle Trace"});
 }
 
 void NodeViewer::showContextMenu(const QPoint &pos)
 {
     QMenu contextMenu(tr("Context menu"), this);
 
-    foreach (const QString &nodeName, m_nodeNames) {
+    foreach (const QString &nodeName, m_nodesAndIds.keys()) {
         if (!m_model->stringList().contains(nodeName)) {
             QAction *addAction = contextMenu.addAction(nodeName);
             connect(addAction, &QAction::triggered, [this, nodeName]() {
                 QStringList dataList = m_model->stringList();
                 dataList.append(nodeName);
                 m_model->setStringList(dataList);
+
+                int nodeId = m_nodesAndIds[nodeName];
+                qDebug() << nodeId;
 
                 emit nodeAdded();
             });

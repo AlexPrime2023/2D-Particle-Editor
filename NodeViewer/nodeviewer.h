@@ -10,8 +10,9 @@ class NodeViewer : public QWidget
 {
     Q_OBJECT
 public:
-    NodeViewer(QWidget *parent = nullptr);
+    NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent = nullptr);
 
+    // TODO Node Selected/Unselected
 signals:
     void nodeAdded();
     void nodeRemoved();
@@ -25,6 +26,8 @@ private:
     QStringListModel *m_model;
 
     QStringList m_nodeNames;
+
+    QHash<QString, int> m_nodesAndIds;
 };
 
 #endif // NODEVIEWER_H
