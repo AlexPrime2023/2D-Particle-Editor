@@ -13,6 +13,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 include($$PWD/../ContextNavigation3D/ContextNavigation3D.pri)
 include($$PWD/../GLGrid/GLGrid.pri)
 include($$PWD/../NodeViewer/NodeViewer.pri)
+include($$PWD/../NodeEditors/NodeEditor/NodeEditor.pri)
 
 SOURCES += \
     main.cpp \
