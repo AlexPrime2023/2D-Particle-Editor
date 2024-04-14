@@ -36,15 +36,15 @@ void NodeEditorEmitterShape::resetEditor()
 
 void NodeEditorEmitterShape::valueEmitterShapeChanged(int value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Emitter Shape", value);
 }
 
 void NodeEditorEmitterShape::valueEmitterPositionChanged()
 {
-    emit nodeEditorWidgetChanged(m_position->value());
+    emit nodeEditorWidgetChanged("Emitter Position", m_position->value());
 }
 
 void NodeEditorEmitterShape::valueEmitterSizeChanged(float value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Emitter Size", value);
 }

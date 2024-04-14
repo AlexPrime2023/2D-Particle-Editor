@@ -42,14 +42,14 @@ void NodeEditorParticleColor::startColorChanged(const QColor &color)
 {
     m_startColorButton->setStyleSheet(QString("background-color: %1").arg(color.name()));
 
-    emit nodeEditorWidgetChanged(color);
+    emit nodeEditorWidgetChanged("Start Color", color);
 }
 
 void NodeEditorParticleColor::endColorChanged(const QColor &color)
 {
     m_endColorButton->setStyleSheet(QString("background-color: %1").arg(color.name()));
 
-    emit nodeEditorWidgetChanged(color);
+    emit nodeEditorWidgetChanged("End Color", color);
 }
 
 void NodeEditorParticleColor::startColorButtonPressed()

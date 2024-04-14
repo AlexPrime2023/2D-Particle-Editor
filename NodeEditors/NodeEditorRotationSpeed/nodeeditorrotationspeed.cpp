@@ -29,7 +29,7 @@ void NodeEditorRotationSpeed::resetEditor()
 
 void NodeEditorRotationSpeed::valueFloatEditChanged(float value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Particle Speed", value);
 }
 
 void NodeEditorRotationSpeed::valueFloatRandomEditChanged(float value)

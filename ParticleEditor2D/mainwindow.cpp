@@ -12,9 +12,6 @@
 
 #include "glgrid.h"
 
-// TODO No active remove node while nodes haven't exist
-// Remove selection
-
 MainWindow::MainWindow(QWidget *parent)
     : m_prevSelectedNodeId(-1),
     QMainWindow(parent)
@@ -66,6 +63,9 @@ MainWindow::MainWindow(QWidget *parent)
     QObject::connect(m_nodeViewer, &NodeViewer::nodeAdded, this, &MainWindow::nodeAdded);
     QObject::connect(m_nodeViewer, &NodeViewer::nodeRemoved, this, &MainWindow::nodeRemoved);
     QObject::connect(m_nodeViewer, &NodeViewer::nodeSelected, this, &MainWindow::nodeSelected);
+
+    for (auto it = m_nodeEditors.begin(); it != m_nodeEditors.end(); ++it)
+        QObject::connect(it.value(), &NodeEditor::nodeEditorWidgetChanged, this, &MainWindow::nodeEditorWidgetChanged);
 }
 
 MainWindow::~MainWindow()
@@ -105,6 +105,11 @@ void MainWindow::nodeSelected(int nodeId)
         m_nodeEditors[m_prevSelectedNodeId]->setVisible(false);
 
     m_prevSelectedNodeId = nodeId;
+}
+
+void MainWindow::nodeEditorWidgetChanged(const QString& name, QVariant param)
+{
+    qDebug() << name << param;
 }
 
 QMenuBar* MainWindow::createTopMenu()

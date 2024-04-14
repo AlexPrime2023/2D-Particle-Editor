@@ -21,5 +21,5 @@ void NodeEditorMaxParticles::resetEditor()
 
 void NodeEditorMaxParticles::valueMaxParticlesChanged(int value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Max Particles", value);
 }

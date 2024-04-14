@@ -14,7 +14,7 @@ NodeEditorEmitterRate::NodeEditorEmitterRate(QWidget *parent) :
 
 void NodeEditorEmitterRate::valueChanged(int value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Emitter Rate", value);
 }
 
 void NodeEditorEmitterRate::resetEditor()

@@ -13,7 +13,7 @@ public:
     virtual void resetEditor() = 0;
 
 signals:
-    void nodeEditorWidgetChanged(QVariant param);
+    void nodeEditorWidgetChanged(const QString &paramName, QVariant param);
 
 protected:
     explicit NodeEditor(QWidget *parent = nullptr);

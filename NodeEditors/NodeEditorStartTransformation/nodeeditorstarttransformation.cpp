@@ -35,15 +35,15 @@ void NodeEditorStartTransformation::resetEditor()
 
 void NodeEditorStartTransformation::valueVelocityChanged()
 {
-    emit nodeEditorWidgetChanged(m_velocity->value());
+    emit nodeEditorWidgetChanged("Velocity", m_velocity->value());
 }
 
 void NodeEditorStartTransformation::valueRotationChanged(float value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Rotation", value);
 }
 
 void NodeEditorStartTransformation::valueSizeChanged(float value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Scale", value);
 }

@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QVariant>
 
 class QHBoxLayout;
 class QMenuBar;
@@ -30,6 +31,8 @@ protected slots:
     void nodeAdded(int nodeId);
     void nodeRemoved(int nodeId);
     void nodeSelected(int nodeId);
+
+    void nodeEditorWidgetChanged(const QString& name, QVariant param);
 
 private:
     QMenuBar* createTopMenu();

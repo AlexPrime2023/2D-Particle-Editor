@@ -21,7 +21,7 @@ NodeEditorForceByTime::NodeEditorForceByTime(QWidget *parent) :
 
 void NodeEditorForceByTime::valueChanged()
 {
-    emit nodeEditorWidgetChanged(m_forceByTimeEdit->value());
+    emit nodeEditorWidgetChanged("Force By Time", m_forceByTimeEdit->value());
 }
 
 void NodeEditorForceByTime::resetEditor()

@@ -31,7 +31,7 @@ void NodeEditorLifeTime::resetEditor()
 
 void NodeEditorLifeTime::valueFloatEditChanged(float value)
 {
-    emit nodeEditorWidgetChanged(value);
+    emit nodeEditorWidgetChanged("Life Time", value);
 }
 
 void NodeEditorLifeTime::valueFloatRandomEditChanged(float value)
