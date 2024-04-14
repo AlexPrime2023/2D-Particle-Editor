@@ -5,6 +5,7 @@
 
 class Vector2DEdit;
 class QPushButton;
+class QCheckBox;
 
 class NodeEditorForceByTime : public NodeEditor
 {
@@ -15,10 +16,12 @@ public:
 
 private slots:
     void valueChanged();
+    void useCurveCheckBoxChanged(bool isUseCurve);
 
 private:
     Vector2DEdit *m_forceByTimeEdit;
     QPushButton *m_openCurveEditor;
+    QCheckBox *m_isUseCurve;
 };
 
 #endif // NODEEDITORFORCEBYTIME_H

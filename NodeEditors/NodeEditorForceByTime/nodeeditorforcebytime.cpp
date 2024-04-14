@@ -4,6 +4,7 @@
 
 #include <QPushButton>
 #include <QVector2D>
+#include <QCheckBox>
 
 NodeEditorForceByTime::NodeEditorForceByTime(QWidget *parent) :
     NodeEditor(parent)
@@ -13,15 +14,25 @@ NodeEditorForceByTime::NodeEditorForceByTime(QWidget *parent) :
     m_forceByTimeEdit->setMaximum(50.0f);
     addItem(QString("Force By Time:"), m_forceByTimeEdit);
 
+    m_isUseCurve = new QCheckBox();
+    addItem(QString("Use Curve:"), m_isUseCurve);
+
     m_openCurveEditor = new QPushButton("Open Curve Editor");
     addItem(QString("Curve Editor:"), m_openCurveEditor);
 
     QObject::connect(m_forceByTimeEdit, &Vector2DEdit::valueChanged, this, &NodeEditorForceByTime::valueChanged);
+    QObject::connect(m_isUseCurve, &QCheckBox::clicked, this, &NodeEditorForceByTime::useCurveCheckBoxChanged);
 }
 
 void NodeEditorForceByTime::valueChanged()
 {
     emit nodeEditorWidgetChanged("Force By Time", m_forceByTimeEdit->value());
+}
+
+void NodeEditorForceByTime::useCurveCheckBoxChanged(bool isUseCurve)
+{
+    m_forceByTimeEdit->setEnabled(!isUseCurve);
+    emit nodeEditorWidgetChanged("Force By Time (curve)", QPointF());
 }
 
 void NodeEditorForceByTime::resetEditor()
