@@ -34,9 +34,6 @@ NodeEditorParticleColor::NodeEditorParticleColor(QWidget *parent) :
 
 void NodeEditorParticleColor::resetEditor()
 {
-    m_startColorDialog->setStyleSheet(QString("background-color: %1").arg(QColor(Qt::red).name()));
-    m_endColorDialog->setStyleSheet(QString("background-color: %1").arg(QColor(Qt::red).name()));
-
     startColorChanged(QColor(Qt::red));
     endColorChanged(QColor(Qt::red));
 }
