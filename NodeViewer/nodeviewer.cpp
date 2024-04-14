@@ -5,12 +5,11 @@
 
 #include <QVBoxLayout>
 #include <QMenu>
-#include <QMouseEvent>
 
 #include <QJsonArray>
 
 NodeViewer::NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent) :
-    m_nodesAndIds(std::move(nodesAndIds)),
+    m_nodesAndIds(nodesAndIds),
     QWidget(parent)
 {
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -21,6 +20,11 @@ NodeViewer::NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent) :
 
     m_model = new QStringListModel({}, this);
     m_listView->setModel(m_model);
+
+    // Disable the ability to edit elements in the list
+    m_listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
+    QObject::connect(m_listView, &QListView::clicked, this, &NodeViewer::selectedNodeChanged);
 }
 
 void NodeViewer::showContextMenu(const QPoint &pos)
@@ -30,15 +34,20 @@ void NodeViewer::showContextMenu(const QPoint &pos)
     foreach (const QString &nodeName, m_nodesAndIds.keys()) {
         if (!m_model->stringList().contains(nodeName)) {
             QAction *addAction = contextMenu.addAction(nodeName);
-            connect(addAction, &QAction::triggered, [this, nodeName]() {
+
+            connect(addAction, &QAction::triggered, [this, nodeName]()
+            {
                 QStringList dataList = m_model->stringList();
                 dataList.append(nodeName);
                 m_model->setStringList(dataList);
 
-                int nodeId = m_nodesAndIds[nodeName];
-                qDebug() << nodeId;
+                // Add the index of the new element
+                // Set the current index in the view
+                QModelIndex newIndex = m_model->index(dataList.count() - 1, 0);
+                m_listView->setCurrentIndex(newIndex);
 
-                emit nodeAdded();
+                emit nodeAdded(m_nodesAndIds[nodeName]);
+                emit nodeSelected(m_nodesAndIds[nodeName]);
             });
         }
     }
@@ -49,6 +58,9 @@ void NodeViewer::showContextMenu(const QPoint &pos)
     connect(&removeAction, &QAction::triggered, this, &NodeViewer::removeNode);
     contextMenu.addAction(&removeAction);
 
+    if (!m_model->rowCount())
+        removeAction.setEnabled(false);
+
     contextMenu.exec(m_listView->mapToGlobal(pos));
 }
 
@@ -58,9 +70,23 @@ void NodeViewer::removeNode()
     if (selectedIndexes.isEmpty())
         return;
 
-    for (const QModelIndex &index : selectedIndexes) {
-        m_model->removeRow(index.row());
-    }
+    const int index = selectedIndexes[0].row();
 
-    emit nodeRemoved();
+    emit nodeRemoved(m_nodesAndIds[m_model->stringList()[index]]);
+    m_model->removeRow(index);
+
+    const int currentSelection = m_listView->currentIndex().row();
+
+    if (currentSelection != -1)
+        emit nodeSelected(m_nodesAndIds[m_model->stringList()[currentSelection]]);
+    else
+        emit nodeSelected(currentSelection);
+}
+
+void NodeViewer::selectedNodeChanged(const QModelIndex &index)
+{
+    if (index.isValid()) {
+        QString nodeName = m_model->stringList().at(index.row());
+        emit nodeSelected(m_nodesAndIds.value(nodeName));
+    }
 }

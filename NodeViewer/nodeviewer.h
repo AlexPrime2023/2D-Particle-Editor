@@ -5,6 +5,8 @@
 
 class QListView;
 class QStringListModel;
+class QMouseEvent;
+class QItemSelection;
 
 class NodeViewer : public QWidget
 {
@@ -12,14 +14,15 @@ class NodeViewer : public QWidget
 public:
     NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent = nullptr);
 
-    // TODO Node Selected/Unselected
 signals:
-    void nodeAdded();
-    void nodeRemoved();
+    void nodeAdded(int nodeId);
+    void nodeRemoved(int nodeId);
+    void nodeSelected(int nodeId);
 
 private slots:
     void showContextMenu(const QPoint &pos);
     void removeNode();
+    void selectedNodeChanged(const QModelIndex &index);
 
 private:
     QListView *m_listView;
