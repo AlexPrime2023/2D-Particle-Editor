@@ -2,6 +2,7 @@
 #define NODEEDITOR_H
 
 #include <QWidget>
+#include <QVariant>
 
 class QFormLayout;
 
@@ -9,9 +10,13 @@ class NodeEditor : public QWidget
 {
     Q_OBJECT
 public:
-    explicit NodeEditor(QWidget *parent = nullptr);
+    virtual void resetEditor() = 0;
+
+signals:
+    void nodeEditorWidgetChanged(QVariant param);
 
 protected:
+    explicit NodeEditor(QWidget *parent = nullptr);
     void addItem(QString name, QWidget *widget, Qt::AlignmentFlag widgetAlignment = Qt::AlignBaseline);
 
 protected:
