@@ -1,5 +1,4 @@
-#ifndef RANDOMFLOATEDIT_H
-#define RANDOMFLOATEDIT_H
+#pragma once
 
 #include <QWidget>
 
@@ -27,6 +26,3 @@ private:
 
     float m_value;
 };
-
-
-#endif // RANDOMFLOATEDIT_H

@@ -1,5 +1,4 @@
-#ifndef VECTOR2DEDIT_H
-#define VECTOR2DEDIT_H
+#pragma once
 
 #include <QWidget>
 
@@ -15,6 +14,3 @@ public:
     QVector2D value() const;
     void setValue(const QVector2D &value);
 };
-
-
-#endif // VECTOR2DEDIT_H

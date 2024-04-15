@@ -1,5 +1,4 @@
-#ifndef NODEEDITORFACTORY_H
-#define NODEEDITORFACTORY_H
+#pragma once
 
 #include <QWidget>
 
@@ -52,5 +51,3 @@ public:
         }
     }
 };
-
-#endif // NODEEDITORFACTORY_H

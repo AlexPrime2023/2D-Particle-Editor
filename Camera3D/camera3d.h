@@ -1,5 +1,4 @@
-#ifndef CAMERA3D_H
-#define CAMERA3D_H
+#pragma once
 
 #include <QMatrix4x4>
 #include <QVector3D>
@@ -35,5 +34,3 @@ private:
     float m_near = 1e-3f;
     float m_far = 1e4f;
 };
-
-#endif // CAMERA3D_H

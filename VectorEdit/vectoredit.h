@@ -1,5 +1,4 @@
-#ifndef VECTOREDIT_H
-#define VECTOREDIT_H
+#pragma once
 
 #include <QWidget>
 
@@ -22,5 +21,3 @@ protected:
 signals:
     void valueChanged();
 };
-
-#endif // VECTOREDIT_H

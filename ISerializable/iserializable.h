@@ -1,5 +1,4 @@
-#ifndef ISERIALIZABLE_H
-#define ISERIALIZABLE_H
+#pragma once
 
 #include <QJsonObject>
 
@@ -9,5 +8,3 @@ public:
     virtual QJsonObject serialize() const = 0;
     virtual void deserialize(const QJsonObject& object) = 0;
 };
-
-#endif // ISERIALIZABLE_H

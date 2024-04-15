@@ -1,5 +1,4 @@
-#ifndef NODEEDITOR_H
-#define NODEEDITOR_H
+#pragma once
 
 #include <QWidget>
 #include <QVariant>
@@ -27,5 +26,3 @@ protected:
 private:
     void insertParam(int row, QString paramTitle, QWidget *widget, Qt::AlignmentFlag widgetAlignment = Qt::AlignBaseline);
 };
-
-#endif // NODEEDITOR_H

@@ -1,5 +1,4 @@
-#ifndef INTEDITOR_H
-#define INTEDITOR_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -47,5 +46,3 @@ protected slots:
 signals:
     void valueChanged(int value);
 };
-
-#endif // INTEDITOR_H

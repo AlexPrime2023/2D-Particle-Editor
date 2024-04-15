@@ -1,5 +1,4 @@
-#ifndef FLOATEDITOR_H
-#define FLOATEDITOR_H
+#pragma once
 
 #include <QLineEdit>
 
@@ -58,5 +57,3 @@ protected slots:
 signals:
     void valueChanged(float value);
 };
-
-#endif // FLOATEDITOR_H

@@ -1,5 +1,4 @@
-#ifndef NODEEDITORSTARTTRANSFORMATION_H
-#define NODEEDITORSTARTTRANSFORMATION_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -28,5 +27,3 @@ private slots:
     void valueRotationChanged(float value);
     void valueSizeChanged(float value);
 };
-
-#endif // NODEEDITORSTARTTRANSFORMATION_H

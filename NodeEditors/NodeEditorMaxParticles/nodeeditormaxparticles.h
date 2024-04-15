@@ -1,5 +1,4 @@
-#ifndef NODEEDITORMAXPARTICLES_H
-#define NODEEDITORMAXPARTICLES_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -22,5 +21,3 @@ private:
 private slots:
     void valueMaxParticlesChanged(int value);
 };
-
-#endif // NODEEDITORMAXPARTICLES_H

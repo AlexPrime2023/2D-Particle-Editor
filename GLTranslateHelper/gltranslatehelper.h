@@ -1,5 +1,4 @@
-#ifndef GLTRANSLATEHELPER_H
-#define GLTRANSLATEHELPER_H
+#pragma once
 
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
@@ -31,7 +30,7 @@ private:
     const QVector4D m_colorZ = QVector4D(0.0f, 0.0f, 1.0f, 1.0f);
     const QVector4D m_selectedColor = QVector4D(0.0f, 1.0f, 1.0f, 1.0f);
 
-    float m_scaleFactor = 1.0f / 2.0f;
+    float m_scaleFactor = 0.5f;
     float m_radius = 0.05f;
     float m_height = 0.16f;
     int m_numSegment = 20;
@@ -59,5 +58,3 @@ private:
     // Utils
     float distBetweenLine(const QVector3D &L1P0, const QVector3D &L1P1, const QVector3D &L2P0, const QVector3D &L2P1, const float &eps = 1e-5f);
 };
-
-#endif // GLTRANSLATEHELPER_H

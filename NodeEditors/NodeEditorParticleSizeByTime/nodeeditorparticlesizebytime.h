@@ -1,5 +1,4 @@
-#ifndef NODEEDITORPARTICLESIZEBYTIME_H
-#define NODEEDITORPARTICLESIZEBYTIME_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -19,5 +18,3 @@ public:
 private:
     QPushButton *m_openCurveEditor;
 };
-
-#endif // NODEEDITORPARTICLESIZEBYTIME_H

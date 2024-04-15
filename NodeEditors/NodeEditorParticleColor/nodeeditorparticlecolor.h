@@ -1,5 +1,4 @@
-#ifndef NODEEDITORPARTICLECOLOR_H
-#define NODEEDITORPARTICLECOLOR_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -38,5 +37,3 @@ private slots:
     void startColorButtonPressed();
     void endColorButtonPressed();
 };
-
-#endif // NODEEDITORPARTICLECOLOR_H

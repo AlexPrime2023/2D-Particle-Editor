@@ -1,5 +1,4 @@
-#ifndef NODEEDITORTRAILTYPE_H
-#define NODEEDITORTRAILTYPE_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -22,5 +21,3 @@ private slots:
 private:
     QComboBox *m_trailType;
 };
-
-#endif // NODEEDITORTRAILTYPE_H

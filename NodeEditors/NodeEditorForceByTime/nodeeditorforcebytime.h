@@ -1,5 +1,4 @@
-#ifndef NODEEDITORFORCEBYTIME_H
-#define NODEEDITORFORCEBYTIME_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -27,5 +26,3 @@ private:
     QPushButton *m_openCurveEditor;
     QCheckBox *m_isUseCurve;
 };
-
-#endif // NODEEDITORFORCEBYTIME_H

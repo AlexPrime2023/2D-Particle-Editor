@@ -1,5 +1,4 @@
-#ifndef NODEVIEWER_H
-#define NODEVIEWER_H
+#pragma once
 
 #include <QWidget>
 #include "iserializable.h"
@@ -37,5 +36,3 @@ private:
 
     QHash<QString, int> m_nodesAndIds;
 };
-
-#endif // NODEVIEWER_H

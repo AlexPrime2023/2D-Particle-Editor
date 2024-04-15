@@ -1,5 +1,4 @@
-#ifndef NODEEDITOREMITTERRATE_H
-#define NODEEDITOREMITTERRATE_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -22,5 +21,3 @@ private slots:
 private:
     IntEdit *m_intEdit;
 };
-
-#endif // NODEEDITOREMITTERRATE_H

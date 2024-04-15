@@ -1,5 +1,4 @@
-#ifndef VIEW_H
-#define VIEW_H
+#pragma once
 
 #include <QOpenGLFunctions>
 #include <QMatrix4x4>
@@ -14,5 +13,3 @@ struct View
 
     QSize viewportSize;
 };
-
-#endif // VIEW_H

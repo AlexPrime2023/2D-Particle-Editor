@@ -1,5 +1,4 @@
-#ifndef VIEWPORT3D_H
-#define VIEWPORT3D_H
+#pragma once
 
 #include <QOpenGLWidget>
 #include <QOpenGLShaderProgram>
@@ -31,5 +30,3 @@ private:
 
     QVector<GLObject *> m_objects;
 };
-
-#endif // VIEWPORT3D_H

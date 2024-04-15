@@ -1,5 +1,4 @@
-#ifndef NODEEDITOREMTTERSHAPE_H
-#define NODEEDITOREMTTERSHAPE_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -29,5 +28,3 @@ private slots:
     void valueEmitterPositionChanged();
     void valueEmitterSizeChanged(float value);
 };
-
-#endif // NODEEDITOREMTTERSHAPE_H

@@ -1,5 +1,4 @@
-#ifndef GLOBJECT_H
-#define GLOBJECT_H
+#pragma once
 
 #include <QOpenGLShaderProgram>
 #include "../View/view.h"
@@ -21,5 +20,3 @@ public:
 protected:
     bool m_isVisible = true;
 };
-
-#endif // GLOBJECT_H

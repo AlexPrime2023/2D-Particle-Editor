@@ -1,5 +1,4 @@
-#ifndef NODEEDITORLIFETIME_H
-#define NODEEDITORLIFETIME_H
+#pragma once
 
 #include "nodeeditor.h"
 
@@ -25,5 +24,3 @@ private slots:
     void valueFloatEditChanged(float value);
     void valueFloatRandomEditChanged(float value);
 };
-
-#endif // NODEEDITORLIFETIME_H

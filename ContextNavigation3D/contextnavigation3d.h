@@ -1,5 +1,4 @@
-#ifndef CONTEXTNAVIGATION3D_H
-#define CONTEXTNAVIGATION3D_H
+#pragma once
 
 #include <QObject>
 #include <QEvent>
@@ -39,5 +38,3 @@ private:
     const float m_speedPan;
     float m_currentZoomZ;
 };
-
-#endif // CONTEXTNAVIGATION3D_H

@@ -1,5 +1,4 @@
-#ifndef GLGRID_H
-#define GLGRID_H
+#pragma once
 
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
@@ -26,5 +25,3 @@ private:
     QVector<QVector3D> m_vertex;
     QVector<int> m_indices;
 };
-
-#endif // GLGRID_H
