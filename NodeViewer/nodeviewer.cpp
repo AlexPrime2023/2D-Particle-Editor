@@ -27,6 +27,40 @@ NodeViewer::NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent) :
     QObject::connect(m_listView, &QListView::clicked, this, &NodeViewer::selectedNodeChanged);
 }
 
+QJsonObject NodeViewer::serialize() const
+{
+    QJsonArray array;
+
+    QStringList nodeList = m_model->stringList();
+    for (auto&& nodeName : nodeList)
+        array.append(nodeName);
+
+    QJsonObject obj;
+    obj["selected_node"] = m_listView->currentIndex().row();
+    obj["nodes"] = array;
+    return obj;
+}
+
+void NodeViewer::deserialize(const QJsonObject& object)
+{
+    QStringList nodeList;
+    QJsonArray array = object["nodes"].toArray();
+
+    for (auto&& item : array)
+        nodeList.append(item.toString());
+
+    m_model->setStringList(nodeList);
+
+    const int selectedNode = object["selected_node"].toInt();
+
+
+    // qDebug() << "Selected Node" << selectedNode;
+    // qDebug() << "Selected Node" << m_model->index(selectedNode, 0).row();
+
+    m_listView->setCurrentIndex(m_model->index(selectedNode, 0));
+    emit nodeSelected(m_nodesAndIds.values()[selectedNode]);
+}
+
 void NodeViewer::showContextMenu(const QPoint &pos)
 {
     QMenu contextMenu(tr("Context menu"), this);

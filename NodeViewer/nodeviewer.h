@@ -2,17 +2,22 @@
 #define NODEVIEWER_H
 
 #include <QWidget>
+#include "iserializable.h"
 
 class QListView;
 class QStringListModel;
 class QMouseEvent;
 class QItemSelection;
 
-class NodeViewer : public QWidget
+class NodeViewer : public QWidget, public ISerializable
 {
     Q_OBJECT
 public:
     NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent = nullptr);
+
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
 
 signals:
     void nodeAdded(int nodeId);
