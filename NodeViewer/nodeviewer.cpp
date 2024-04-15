@@ -52,13 +52,8 @@ void NodeViewer::deserialize(const QJsonObject& object)
     m_model->setStringList(nodeList);
 
     const int selectedNode = object["selected_node"].toInt();
-
-
-    // qDebug() << "Selected Node" << selectedNode;
-    // qDebug() << "Selected Node" << m_model->index(selectedNode, 0).row();
-
     m_listView->setCurrentIndex(m_model->index(selectedNode, 0));
-    emit nodeSelected(m_nodesAndIds.values()[selectedNode]);
+    emit nodeSelected(m_nodesAndIds[m_model->stringList()[selectedNode]]);
 }
 
 void NodeViewer::showContextMenu(const QPoint &pos)
