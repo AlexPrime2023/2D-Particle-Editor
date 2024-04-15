@@ -14,11 +14,7 @@ QVector2D StringUtils::QStringToQVector2D(const QString &string)
     if (string.isEmpty())
         return QVector2D();
 
-    qDebug() << "Vector" << string;
-
     QStringList parts = string.split(',', QString::SkipEmptyParts);
-
-    qDebug() << "StringList" << parts;
 
     if (parts.size() != 2)
         return QVector2D();
@@ -26,8 +22,6 @@ QVector2D StringUtils::QStringToQVector2D(const QString &string)
     bool okX, okY;
     float x = parts[0].trimmed().toFloat(&okX);
     float y = parts[1].trimmed().toFloat(&okY);
-
-    qDebug() << "x" << x << "y" << y;
 
     if (!okX || !okY)
         return QVector2D();
