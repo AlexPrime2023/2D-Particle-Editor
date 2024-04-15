@@ -49,6 +49,7 @@ bool JsonFileUtils::isReadJsonObjectFromFileSuccessfully(const QString& filePath
         return false;
     }
 
+    message = QString("JSON object read from file: %1").arg(filePath);
     jsonObject = jsonDoc.object();
     return true;
 }
