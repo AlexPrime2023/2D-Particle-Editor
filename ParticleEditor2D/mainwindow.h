@@ -39,7 +39,10 @@ protected slots:
 
 private:
     QMenuBar* createTopMenu();
+    Viewport3D *createViewport();
     void createNodeEditors();
+
+    void connectSignalsAndSlots();
 
 private:
     Camera3D *m_camera3D;

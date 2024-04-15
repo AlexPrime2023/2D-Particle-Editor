@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent)
             {"Particle Trace", 11}
         };
 
-    // untitled
     setWindowTitle(m_projectName.arg("untitled*"));
 
     // Central Widget
@@ -53,45 +52,16 @@ MainWindow::MainWindow(QWidget *parent)
     m_centralLayout->addWidget(m_nodeViewer);
 
     // 3D stuff
-    m_camera3D = new Camera3D(QVector3D(0.0f, 0.0f, -50.0f), 45.0f);
-    m_camera3D->setRotation(QVector3D(0.5f, -90.0f, -24.0f));
-
-    m_viewport3D = new Viewport3D(m_camera3D);
-    m_viewport3D->addObject(new GLGrid(20, 5.0f));
-    m_viewport3D->addObject(new GLTranslateHelper(m_camera3D));
-
-    m_contextNavigation3D = new ContextNavigation3D(m_viewport3D, m_camera3D);
-    m_centralLayout->addWidget(m_viewport3D, 1);
+    m_centralLayout->addWidget(createViewport(), 1);
 
     // Node Editors
     createNodeEditors();
 
     // Top Menu
-    //setMenuBar(createTopMenu());
+    setMenuBar(createTopMenu());
 
-    QObject::connect(m_nodeViewer, &NodeViewer::nodeAdded, this, &MainWindow::nodeAdded);
-    QObject::connect(m_nodeViewer, &NodeViewer::nodeRemoved, this, &MainWindow::nodeRemoved);
-    QObject::connect(m_nodeViewer, &NodeViewer::nodeSelected, this, &MainWindow::nodeSelected);
-
-    for (auto it = m_nodeEditors.begin(); it != m_nodeEditors.end(); ++it)
-        QObject::connect(it.value(), &NodeEditor::nodeEditorWidgetChanged, this, &MainWindow::nodeEditorWidgetChanged);
-
-
-
-    QMenuBar *menuBar = new QMenuBar(this);
-
-    QMenu *fileMenu = menuBar->addMenu(tr("File"));
-
-    QAction *saveAction = new QAction(tr("Save"), this);
-    fileMenu->addAction(saveAction);
-
-    QAction *loadAction = new QAction(tr("Load"), this);
-    fileMenu->addAction(loadAction);
-
-    setMenuBar(menuBar);
-
-    QObject::connect(saveAction, &QAction::triggered, this, &MainWindow::saveToFile);
-    QObject::connect(loadAction, &QAction::triggered, this, &MainWindow::loadFromFile);
+    // Signals And Slots
+    connectSignalsAndSlots();
 }
 
 MainWindow::~MainWindow()
@@ -150,7 +120,23 @@ QMenuBar* MainWindow::createTopMenu()
     QAction *loadAction = new QAction(tr("Load"), this);
     fileMenu->addAction(loadAction);
 
+    QObject::connect(saveAction, &QAction::triggered, this, &MainWindow::saveToFile);
+    QObject::connect(loadAction, &QAction::triggered, this, &MainWindow::loadFromFile);
+
     return menuBar;
+}
+
+Viewport3D* MainWindow::createViewport()
+{
+    m_camera3D = new Camera3D(QVector3D(0.0f, 0.0f, -50.0f), 45.0f);
+    m_camera3D->setRotation(QVector3D(0.5f, -90.0f, -24.0f));
+
+    m_viewport3D = new Viewport3D(m_camera3D);
+    m_viewport3D->addObject(new GLGrid(20, 5.0f));
+    m_viewport3D->addObject(new GLTranslateHelper(m_camera3D));
+
+    m_contextNavigation3D = new ContextNavigation3D(m_viewport3D, m_camera3D);
+    return m_viewport3D;
 }
 
 void MainWindow::createNodeEditors()
@@ -167,6 +153,16 @@ void MainWindow::createNodeEditors()
             m_editor->setVisible(false);
         }
     }
+}
+
+void MainWindow::connectSignalsAndSlots()
+{
+    QObject::connect(m_nodeViewer, &NodeViewer::nodeAdded, this, &MainWindow::nodeAdded);
+    QObject::connect(m_nodeViewer, &NodeViewer::nodeRemoved, this, &MainWindow::nodeRemoved);
+    QObject::connect(m_nodeViewer, &NodeViewer::nodeSelected, this, &MainWindow::nodeSelected);
+
+    for (auto it = m_nodeEditors.begin(); it != m_nodeEditors.end(); ++it)
+        QObject::connect(it.value(), &NodeEditor::nodeEditorWidgetChanged, this, &MainWindow::nodeEditorWidgetChanged);
 }
 
 void MainWindow::saveToFile()
