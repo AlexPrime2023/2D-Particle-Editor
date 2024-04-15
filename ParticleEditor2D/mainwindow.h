@@ -34,9 +34,15 @@ protected slots:
 
     void nodeEditorWidgetChanged(const QString& name, QVariant param);
 
+    void saveToFile();
+    void loadFromFile();
+
 private:
     QMenuBar* createTopMenu();
     void createNodeEditors();
+
+    void saveJsonObject(const QJsonObject& jsonObject, const QString& filePath);
+    QJsonObject readJsonObjectFromFile(const QString& filePath);
 
 private:
     Camera3D *m_camera3D;

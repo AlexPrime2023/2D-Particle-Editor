@@ -2,6 +2,7 @@
 
 #include <QHBoxLayout>
 #include <QMenuBar>
+#include <QJsonDocument>
 
 #include "camera3d.h"
 #include "viewport3d.h"
@@ -58,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent)
     createNodeEditors();
 
     // Top Menu
-    setMenuBar(createTopMenu());
+    //setMenuBar(createTopMenu());
 
     QObject::connect(m_nodeViewer, &NodeViewer::nodeAdded, this, &MainWindow::nodeAdded);
     QObject::connect(m_nodeViewer, &NodeViewer::nodeRemoved, this, &MainWindow::nodeRemoved);
@@ -66,6 +67,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     for (auto it = m_nodeEditors.begin(); it != m_nodeEditors.end(); ++it)
         QObject::connect(it.value(), &NodeEditor::nodeEditorWidgetChanged, this, &MainWindow::nodeEditorWidgetChanged);
+
+
+
+    QMenuBar *menuBar = new QMenuBar(this);
+
+    QMenu *fileMenu = menuBar->addMenu(tr("File"));
+
+    QAction *saveAction = new QAction(tr("Save"), this);
+    fileMenu->addAction(saveAction);
+
+    QAction *loadAction = new QAction(tr("Load"), this);
+    fileMenu->addAction(loadAction);
+
+    setMenuBar(menuBar);
+
+    QObject::connect(saveAction, &QAction::triggered, this, &MainWindow::saveToFile);
+    QObject::connect(loadAction, &QAction::triggered, this, &MainWindow::loadFromFile);
 }
 
 MainWindow::~MainWindow()
@@ -141,4 +159,77 @@ void MainWindow::createNodeEditors()
             m_editor->setVisible(false);
         }
     }
+}
+
+void MainWindow::saveToFile()
+{
+    QJsonObject nodeViewerStates = m_nodeViewer->serialize();
+
+    QJsonObject nodeEditorsStates;
+    for (auto it = m_nodeEditors.begin(); it != m_nodeEditors.end(); ++it)
+        nodeEditorsStates[QString::number(it.key())] = it.value()->serialize();
+
+    QJsonObject resultObject;
+    resultObject["node_viewer"] = nodeViewerStates;
+    resultObject["node_editors"] = nodeEditorsStates;
+
+    QString filePath = "D:/output.json";
+    saveJsonObject(resultObject, filePath);
+}
+
+void MainWindow::loadFromFile()
+{
+    QString filePath = "D:/output.json";
+    QJsonObject resultObject = readJsonObjectFromFile(filePath);
+
+    QJsonObject nodeViewerStates = resultObject["node_viewer"].toObject();
+    QJsonObject nodeEditorsStates = resultObject["node_editors"].toObject();
+
+    m_nodeViewer->deserialize(nodeViewerStates);
+
+    for (auto it = nodeEditorsStates.constBegin(); it != nodeEditorsStates.constEnd(); ++it)
+    {
+        int nodeId = it.key().toInt();
+        QJsonObject object = it.value().toObject();
+
+        if (m_nodeEditors.contains(nodeId) && m_nodeEditors[nodeId])
+            m_nodeEditors[nodeId]->deserialize(object);
+    }
+}
+
+// TODO to utils
+
+void MainWindow::saveJsonObject(const QJsonObject& jsonObject, const QString& filePath) {
+    QJsonDocument jsonDoc(jsonObject);
+    QFile file(filePath);
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Failed to open file for writing: " << filePath;
+        return;
+    }
+    file.write(jsonDoc.toJson());
+    file.close();
+    qDebug() << "JSON object saved to file: " << filePath;
+}
+
+QJsonObject MainWindow::readJsonObjectFromFile(const QString& filePath) {
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "Failed to open file for reading: " << filePath;
+        return QJsonObject();
+    }
+
+    QByteArray jsonData = file.readAll();
+    QJsonParseError error;
+    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &error);
+    if (jsonDoc.isNull()) {
+        qDebug() << "Failed to parse JSON data: " << error.errorString();
+        return QJsonObject();
+    }
+
+    if (!jsonDoc.isObject()) {
+        qDebug() << "JSON data is not an object";
+        return QJsonObject();
+    }
+
+    return jsonDoc.object();
 }
