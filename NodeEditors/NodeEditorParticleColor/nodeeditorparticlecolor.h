@@ -5,6 +5,7 @@
 
 class QPushButton;
 class QColorDialog;
+class QColor;
 
 class NodeEditorParticleColor : public NodeEditor
 {
@@ -26,6 +27,9 @@ private:
 
     QColorDialog *m_startColorDialog;
     QColorDialog *m_endColorDialog;
+
+    QColor m_startColor;
+    QColor m_endColor;
 
 private slots:
     void startColorChanged(const QColor &color);

@@ -41,6 +41,7 @@ void NodeEditorParticleColor::resetEditor()
 void NodeEditorParticleColor::startColorChanged(const QColor &color)
 {
     m_startColorButton->setStyleSheet(QString("background-color: %1").arg(color.name()));
+    m_startColor = color;
 
     emit nodeEditorWidgetChanged("Start Color", color);
 }
@@ -48,6 +49,7 @@ void NodeEditorParticleColor::startColorChanged(const QColor &color)
 void NodeEditorParticleColor::endColorChanged(const QColor &color)
 {
     m_endColorButton->setStyleSheet(QString("background-color: %1").arg(color.name()));
+    m_endColor = color;
 
     emit nodeEditorWidgetChanged("End Color", color);
 }
@@ -65,8 +67,8 @@ void NodeEditorParticleColor::endColorButtonPressed()
 QJsonObject NodeEditorParticleColor::serialize() const
 {
     QJsonObject obj;
-    obj["start_color"] = m_startColorDialog->currentColor().name();
-    obj["end_color"] = m_endColorDialog->currentColor().name();
+    obj["start_color"] = m_startColor.name();
+    obj["end_color"] = m_endColor.name();
     return obj;
 }
 
