@@ -24,9 +24,9 @@ NodeEditorForceByTime::NodeEditorForceByTime(QWidget *parent) :
 
     m_curveEditorDialog = new CurveEditorDialog();
 
-    QObject::connect(m_forceByTimeEdit, &Vector2DEdit::valueChanged, this, &NodeEditorForceByTime::valueChanged);
-    QObject::connect(m_isUseCurve, &QCheckBox::clicked, this, &NodeEditorForceByTime::useCurveCheckBoxChanged);
-    QObject::connect(m_openCurveEditor, &QPushButton::pressed, this, &NodeEditorForceByTime::curveEditorButtonPressed);
+    QObject::connect(m_forceByTimeEdit, &Vector2DEdit::valueChanged, this, &NodeEditorForceByTime::onValueChanged);
+    QObject::connect(m_isUseCurve, &QCheckBox::clicked, this, &NodeEditorForceByTime::onUseCurveCheckBoxChanged);
+    QObject::connect(m_openCurveEditor, &QPushButton::pressed, this, &NodeEditorForceByTime::onCurveEditorButtonPressed);
 }
 
 NodeEditorForceByTime::~NodeEditorForceByTime()
@@ -35,18 +35,18 @@ NodeEditorForceByTime::~NodeEditorForceByTime()
     m_curveEditorDialog = nullptr;
 }
 
-void NodeEditorForceByTime::valueChanged()
+void NodeEditorForceByTime::onValueChanged()
 {
     emit nodeEditorWidgetChanged("Force By Time", m_forceByTimeEdit->value());
 }
 
-void NodeEditorForceByTime::useCurveCheckBoxChanged(bool isUseCurve)
+void NodeEditorForceByTime::onUseCurveCheckBoxChanged(bool isUseCurve)
 {
     m_forceByTimeEdit->setEnabled(!isUseCurve);
     emit nodeEditorWidgetChanged("Force By Time (curve)", QPointF());
 }
 
-void NodeEditorForceByTime::curveEditorButtonPressed()
+void NodeEditorForceByTime::onCurveEditorButtonPressed()
 {
     m_curveEditorDialog->show();
 }

@@ -75,12 +75,12 @@ MainWindow::~MainWindow()
     m_contextNavigation3D = nullptr;
 }
 
-void MainWindow::nodeAdded(int nodeId)
+void MainWindow::onNodeAdded(int nodeId)
 {
     qDebug() << "Node added:" << nodeId;
 }
 
-void MainWindow::nodeRemoved(int nodeId)
+void MainWindow::onNodeRemoved(int nodeId)
 {
     qDebug() << "Node removed:" << nodeId;
 
@@ -88,7 +88,7 @@ void MainWindow::nodeRemoved(int nodeId)
         m_nodeEditors[nodeId]->resetEditor();
 }
 
-void MainWindow::nodeSelected(int nodeId)
+void MainWindow::onNodeSelected(int nodeId)
 {
     if ((nodeId == -1) && (m_prevSelectedNodeId != -1)) {
         m_nodeEditors[m_prevSelectedNodeId]->setVisible(false);
@@ -105,7 +105,7 @@ void MainWindow::nodeSelected(int nodeId)
     m_prevSelectedNodeId = nodeId;
 }
 
-void MainWindow::nodeEditorWidgetChanged(const QString& name, QVariant param)
+void MainWindow::onNodeEditorWidgetChanged(const QString& name, QVariant param)
 {
     qDebug() << name << param;
 }
@@ -128,8 +128,8 @@ QMenuBar* MainWindow::createTopMenu()
     QAction *aboutAction = new QAction(tr("About"), this);
     aboutMenu->addAction(aboutAction);
 
-    QObject::connect(saveAction, &QAction::triggered, this, &MainWindow::saveToFile);
-    QObject::connect(loadAction, &QAction::triggered, this, &MainWindow::loadFromFile);
+    QObject::connect(saveAction, &QAction::triggered, this, &MainWindow::onSaveToFile);
+    QObject::connect(loadAction, &QAction::triggered, this, &MainWindow::onLoadFromFile);
 
     return menuBar;
 }
@@ -165,15 +165,15 @@ void MainWindow::createNodeEditors()
 
 void MainWindow::connectSignalsAndSlots()
 {
-    QObject::connect(m_nodeViewer, &NodeViewer::nodeAdded, this, &MainWindow::nodeAdded);
-    QObject::connect(m_nodeViewer, &NodeViewer::nodeRemoved, this, &MainWindow::nodeRemoved);
-    QObject::connect(m_nodeViewer, &NodeViewer::nodeSelected, this, &MainWindow::nodeSelected);
+    QObject::connect(m_nodeViewer, &NodeViewer::nodeAdded, this, &MainWindow::onNodeAdded);
+    QObject::connect(m_nodeViewer, &NodeViewer::nodeRemoved, this, &MainWindow::onNodeRemoved);
+    QObject::connect(m_nodeViewer, &NodeViewer::nodeSelected, this, &MainWindow::onNodeSelected);
 
     for (auto it = m_nodeEditors.begin(); it != m_nodeEditors.end(); ++it)
-        QObject::connect(it.value(), &NodeEditor::nodeEditorWidgetChanged, this, &MainWindow::nodeEditorWidgetChanged);
+        QObject::connect(it.value(), &NodeEditor::nodeEditorWidgetChanged, this, &MainWindow::onNodeEditorWidgetChanged);
 }
 
-void MainWindow::saveToFile()
+void MainWindow::onSaveToFile()
 {
     QString filePath = PathFileUtils::filePathDialog("Save file", QFileDialog::AcceptSave, "JSON Files (*.json)", QString("%1.json").arg(m_notNamedProjectName));
 
@@ -198,7 +198,7 @@ void MainWindow::saveToFile()
     QMessageBox::information(nullptr, isSaveSuccessfully ? "Info" : "Error", message);
 }
 
-void MainWindow::loadFromFile()
+void MainWindow::onLoadFromFile()
 {
     QString filePath = PathFileUtils::filePathDialog("Save file", QFileDialog::AcceptOpen, "JSON Files (*.json)");
 

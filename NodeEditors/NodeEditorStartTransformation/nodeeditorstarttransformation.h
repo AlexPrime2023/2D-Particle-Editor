@@ -23,7 +23,7 @@ private:
     FloatEdit *m_size;
 
 private slots:
-    void valueVelocityChanged();
-    void valueRotationChanged(float value);
-    void valueSizeChanged(float value);
+    void onValueVelocityChanged();
+    void onValueRotationChanged(float value);
+    void onValueSizeChanged(float value);
 };

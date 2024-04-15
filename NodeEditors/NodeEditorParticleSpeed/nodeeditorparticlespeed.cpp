@@ -14,8 +14,8 @@ NodeEditorParticleSpeed::NodeEditorParticleSpeed(QWidget *parent) :
     m_randomParticleSpeed->setRange(-50.0f, 50.0f);
     addItem(QString("Particle Speed Random Range:"), m_randomParticleSpeed);
 
-    QObject::connect(m_particleSpeed, &FloatEdit::valueChanged, this, &NodeEditorParticleSpeed::valueFloatEditChanged);
-    QObject::connect(m_randomParticleSpeed, &RandomFloatEdit::valueChanged, this, &NodeEditorParticleSpeed::valueFloatRandomEditChanged);
+    QObject::connect(m_particleSpeed, &FloatEdit::valueChanged, this, &NodeEditorParticleSpeed::onValueFloatEditChanged);
+    QObject::connect(m_randomParticleSpeed, &RandomFloatEdit::valueChanged, this, &NodeEditorParticleSpeed::onValueFloatRandomEditChanged);
 }
 
 void NodeEditorParticleSpeed::resetEditor()
@@ -27,12 +27,12 @@ void NodeEditorParticleSpeed::resetEditor()
     m_randomParticleSpeed->setValue(0.0f);
 }
 
-void NodeEditorParticleSpeed::valueFloatEditChanged(float value)
+void NodeEditorParticleSpeed::onValueFloatEditChanged(float value)
 {
     emit nodeEditorWidgetChanged("Particle Speed", value);
 }
 
-void NodeEditorParticleSpeed::valueFloatRandomEditChanged(float value)
+void NodeEditorParticleSpeed::onValueFloatRandomEditChanged(float value)
 {
     m_particleSpeed->setValue(value);
 }

@@ -21,6 +21,6 @@ private:
     RandomFloatEdit *m_randomParticleSpeed;
 
 private slots:
-    void valueFloatEditChanged(float value);
-    void valueFloatRandomEditChanged(float value);
+    void onValueFloatEditChanged(float value);
+    void onValueFloatRandomEditChanged(float value);
 };

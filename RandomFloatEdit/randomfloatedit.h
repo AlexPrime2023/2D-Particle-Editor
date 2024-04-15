@@ -19,7 +19,7 @@ signals:
     void valueChanged(float value);
 
 private slots:
-    void locaValueChanged(float value);
+    void onLocaValueChanged(float value);
 
 private:
     QVector<FloatEdit*> m_edits;

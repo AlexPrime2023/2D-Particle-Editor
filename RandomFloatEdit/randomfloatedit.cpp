@@ -38,7 +38,7 @@ float RandomFloatEdit::value() const
     return m_value;
 }
 
-void RandomFloatEdit::locaValueChanged(float value)
+void RandomFloatEdit::onLocaValueChanged(float value)
 {
     FloatEdit *changedEdit = qobject_cast<FloatEdit*>(sender());
 

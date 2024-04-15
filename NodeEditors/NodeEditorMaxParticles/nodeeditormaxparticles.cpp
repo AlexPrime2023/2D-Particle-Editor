@@ -11,7 +11,7 @@ NodeEditorMaxParticles::NodeEditorMaxParticles(QWidget *parent) :
     m_maxParticles->setRange(0, 1500);
     addItem(QString("Max Particles:"), m_maxParticles);
 
-    QObject::connect(m_maxParticles, &IntEdit::valueChanged, this, &NodeEditorMaxParticles::valueMaxParticlesChanged);
+    QObject::connect(m_maxParticles, &IntEdit::valueChanged, this, &NodeEditorMaxParticles::onValueMaxParticlesChanged);
 }
 
 void NodeEditorMaxParticles::resetEditor()
@@ -19,7 +19,7 @@ void NodeEditorMaxParticles::resetEditor()
     m_maxParticles->setValue(0);
 }
 
-void NodeEditorMaxParticles::valueMaxParticlesChanged(int value)
+void NodeEditorMaxParticles::onValueMaxParticlesChanged(int value)
 {
     emit nodeEditorWidgetChanged("Max Particles", value);
 }

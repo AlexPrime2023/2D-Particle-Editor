@@ -24,9 +24,9 @@ signals:
     void nodeSelected(int nodeId);
 
 private slots:
-    void showContextMenu(const QPoint &pos);
-    void removeNode();
-    void selectedNodeChanged(const QModelIndex &index);
+    void onShowContextMenu(const QPoint &pos);
+    void onRemoveNode();
+    void onSelectedNodeChanged(const QModelIndex &index);
 
 private:
     QListView *m_listView;

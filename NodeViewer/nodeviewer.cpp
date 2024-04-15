@@ -15,7 +15,7 @@ NodeViewer::NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent) :
     QVBoxLayout *layout = new QVBoxLayout(this);
     m_listView = new QListView(this);
     m_listView->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(m_listView, &QListView::customContextMenuRequested, this, &NodeViewer::showContextMenu);
+    connect(m_listView, &QListView::customContextMenuRequested, this, &NodeViewer::onShowContextMenu);
     layout->addWidget(m_listView);
 
     m_model = new QStringListModel({}, this);
@@ -24,7 +24,7 @@ NodeViewer::NodeViewer(QHash<QString, int> nodesAndIds, QWidget *parent) :
     // Disable the ability to edit elements in the list
     m_listView->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-    QObject::connect(m_listView, &QListView::clicked, this, &NodeViewer::selectedNodeChanged);
+    QObject::connect(m_listView, &QListView::clicked, this, &NodeViewer::onSelectedNodeChanged);
 }
 
 QJsonObject NodeViewer::serialize() const
@@ -56,7 +56,7 @@ void NodeViewer::deserialize(const QJsonObject& object)
     emit nodeSelected(m_nodesAndIds[m_model->stringList()[selectedNode]]);
 }
 
-void NodeViewer::showContextMenu(const QPoint &pos)
+void NodeViewer::onShowContextMenu(const QPoint &pos)
 {
     QMenu contextMenu(tr("Context menu"), this);
 
@@ -84,7 +84,7 @@ void NodeViewer::showContextMenu(const QPoint &pos)
     contextMenu.addSeparator();
 
     QAction removeAction(tr("Remove node"), this);
-    connect(&removeAction, &QAction::triggered, this, &NodeViewer::removeNode);
+    connect(&removeAction, &QAction::triggered, this, &NodeViewer::onRemoveNode);
     contextMenu.addAction(&removeAction);
 
     if (!m_model->rowCount())
@@ -93,7 +93,7 @@ void NodeViewer::showContextMenu(const QPoint &pos)
     contextMenu.exec(m_listView->mapToGlobal(pos));
 }
 
-void NodeViewer::removeNode()
+void NodeViewer::onRemoveNode()
 {
     QModelIndexList selectedIndexes = m_listView->selectionModel()->selectedIndexes();
     if (selectedIndexes.isEmpty())
@@ -112,7 +112,7 @@ void NodeViewer::removeNode()
         emit nodeSelected(currentSelection);
 }
 
-void NodeViewer::selectedNodeChanged(const QModelIndex &index)
+void NodeViewer::onSelectedNodeChanged(const QModelIndex &index)
 {
     if (index.isValid()) {
         QString nodeName = m_model->stringList().at(index.row());

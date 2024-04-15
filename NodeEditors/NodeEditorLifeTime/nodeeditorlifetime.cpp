@@ -16,8 +16,8 @@ NodeEditorLifeTime::NodeEditorLifeTime(QWidget *parent) :
     m_randomFloatEdit->setRange(0.0f, 5.0f);
     addItem(QString("Life Time Random Range:"), m_randomFloatEdit);
 
-    QObject::connect(m_floatEdit, &FloatEdit::valueChanged, this, &NodeEditorLifeTime::valueFloatEditChanged);
-    QObject::connect(m_randomFloatEdit, &RandomFloatEdit::valueChanged, this, &NodeEditorLifeTime::valueFloatRandomEditChanged);
+    QObject::connect(m_floatEdit, &FloatEdit::valueChanged, this, &NodeEditorLifeTime::onValueFloatEditChanged);
+    QObject::connect(m_randomFloatEdit, &RandomFloatEdit::valueChanged, this, &NodeEditorLifeTime::onValueFloatRandomEditChanged);
 }
 
 void NodeEditorLifeTime::resetEditor()
@@ -29,12 +29,12 @@ void NodeEditorLifeTime::resetEditor()
     m_floatEdit->setValue(0.0f);
 }
 
-void NodeEditorLifeTime::valueFloatEditChanged(float value)
+void NodeEditorLifeTime::onValueFloatEditChanged(float value)
 {
     emit nodeEditorWidgetChanged("Life Time", value);
 }
 
-void NodeEditorLifeTime::valueFloatRandomEditChanged(float value)
+void NodeEditorLifeTime::onValueFloatRandomEditChanged(float value)
 {
     m_floatEdit->setValue(value);
 }

@@ -18,7 +18,7 @@ public:
     void deserialize(const QJsonObject& object) override;
 
 private slots:
-    void curveEditorButtonPressed();
+    void onCurveEditorButtonPressed();
 
 private:
     QPushButton *m_openCurveEditor;

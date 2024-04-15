@@ -36,12 +36,12 @@ private:
     CurveEditorDialog *m_curveEditorDialogAlpha;
 
 private slots:
-    void startColorChanged(const QColor &color);
-    void endColorChanged(const QColor &color);
+    void onStartColorChanged(const QColor &color);
+    void onEndColorChanged(const QColor &color);
 
-    void startColorButtonPressed();
-    void endColorButtonPressed();
+    void onStartColorButtonPressed();
+    void onEndColorButtonPressed();
 
-    void curveEditorRGBButtonPressed();
-    void curveEditorAlphaButtonPressed();
+    void onCurveEditorRGBButtonPressed();
+    void onCurveEditorAlphaButtonPressed();
 };

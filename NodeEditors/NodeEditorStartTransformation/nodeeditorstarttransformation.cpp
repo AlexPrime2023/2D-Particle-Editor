@@ -22,9 +22,9 @@ NodeEditorStartTransformation::NodeEditorStartTransformation(QWidget *parent) :
     m_size->setRange(0.0f, 50.0f);
     addItem(QString("Scale:"), m_size);
 
-    QObject::connect(m_velocity, &Vector2DEdit::valueChanged, this, &NodeEditorStartTransformation::valueVelocityChanged);
-    QObject::connect(m_rotation, &FloatEdit::valueChanged, this, &NodeEditorStartTransformation::valueRotationChanged);
-    QObject::connect(m_size, &FloatEdit::valueChanged, this, &NodeEditorStartTransformation::valueSizeChanged);
+    QObject::connect(m_velocity, &Vector2DEdit::valueChanged, this, &NodeEditorStartTransformation::onValueVelocityChanged);
+    QObject::connect(m_rotation, &FloatEdit::valueChanged, this, &NodeEditorStartTransformation::onValueRotationChanged);
+    QObject::connect(m_size, &FloatEdit::valueChanged, this, &NodeEditorStartTransformation::onValueSizeChanged);
 }
 
 void NodeEditorStartTransformation::resetEditor()
@@ -34,17 +34,17 @@ void NodeEditorStartTransformation::resetEditor()
     m_size->setValue(0.0f);
 }
 
-void NodeEditorStartTransformation::valueVelocityChanged()
+void NodeEditorStartTransformation::onValueVelocityChanged()
 {
     emit nodeEditorWidgetChanged("Velocity", m_velocity->value());
 }
 
-void NodeEditorStartTransformation::valueRotationChanged(float value)
+void NodeEditorStartTransformation::onValueRotationChanged(float value)
 {
     emit nodeEditorWidgetChanged("Rotation", value);
 }
 
-void NodeEditorStartTransformation::valueSizeChanged(float value)
+void NodeEditorStartTransformation::onValueSizeChanged(float value)
 {
     emit nodeEditorWidgetChanged("Scale", value);
 }

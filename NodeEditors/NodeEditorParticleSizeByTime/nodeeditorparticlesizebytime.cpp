@@ -13,7 +13,7 @@ NodeEditorParticleSizeByTime::NodeEditorParticleSizeByTime(QWidget *parent) :
 
     m_curveEditorDialog = new CurveEditorDialog();
 
-    QObject::connect(m_openCurveEditor, &QPushButton::pressed, this, &NodeEditorParticleSizeByTime::curveEditorButtonPressed);
+    QObject::connect(m_openCurveEditor, &QPushButton::pressed, this, &NodeEditorParticleSizeByTime::onCurveEditorButtonPressed);
 }
 
 NodeEditorParticleSizeByTime::~NodeEditorParticleSizeByTime()
@@ -22,7 +22,7 @@ NodeEditorParticleSizeByTime::~NodeEditorParticleSizeByTime()
     m_curveEditorDialog = nullptr;
 }
 
-void NodeEditorParticleSizeByTime::curveEditorButtonPressed()
+void NodeEditorParticleSizeByTime::onCurveEditorButtonPressed()
 {
     m_curveEditorDialog->show();
 }

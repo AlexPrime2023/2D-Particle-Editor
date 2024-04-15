@@ -24,7 +24,7 @@ private:
     FloatEdit *m_size;
 
 private slots:
-    void valueEmitterShapeChanged(int value);
-    void valueEmitterPositionChanged();
-    void valueEmitterSizeChanged(float value);
+    void onValueEmitterShapeChanged(int value);
+    void onValueEmitterPositionChanged();
+    void onValueEmitterSizeChanged(float value);
 };

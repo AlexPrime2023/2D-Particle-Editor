@@ -27,14 +27,14 @@ private:
     QHBoxLayout *m_centralLayout;
 
 protected slots:
-    void nodeAdded(int nodeId);
-    void nodeRemoved(int nodeId);
-    void nodeSelected(int nodeId);
+    void onNodeAdded(int nodeId);
+    void onNodeRemoved(int nodeId);
+    void onNodeSelected(int nodeId);
 
-    void nodeEditorWidgetChanged(const QString& name, QVariant param);
+    void onNodeEditorWidgetChanged(const QString& name, QVariant param);
 
-    void saveToFile();
-    void loadFromFile();
+    void onSaveToFile();
+    void onLoadFromFile();
 
 private:
     QMenuBar* createTopMenu();

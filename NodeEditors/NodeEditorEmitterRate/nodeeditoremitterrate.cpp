@@ -9,10 +9,10 @@ NodeEditorEmitterRate::NodeEditorEmitterRate(QWidget *parent) :
     m_intEdit->setRange(0, 150);
     addItem(QString("Emitter Rate:"), m_intEdit);
 
-    QObject::connect(m_intEdit, &IntEdit::valueChanged, this, &NodeEditorEmitterRate::valueChanged);
+    QObject::connect(m_intEdit, &IntEdit::valueChanged, this, &NodeEditorEmitterRate::onValueChanged);
 }
 
-void NodeEditorEmitterRate::valueChanged(int value)
+void NodeEditorEmitterRate::onValueChanged(int value)
 {
     emit nodeEditorWidgetChanged("Emitter Rate", value);
 }

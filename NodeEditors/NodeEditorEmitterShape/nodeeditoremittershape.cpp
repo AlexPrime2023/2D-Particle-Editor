@@ -23,9 +23,9 @@ NodeEditorEmitterShape::NodeEditorEmitterShape(QWidget *parent) :
     m_size->setRange(0.0f, 200.0f);
     addItem(QString("Emitter Size:"), m_size);
 
-    QObject::connect(m_shape,SIGNAL(currentIndexChanged(int)),this,SLOT(valueEmitterShapeChanged(int)));
-    QObject::connect(m_position, &Vector2DEdit::valueChanged, this, &NodeEditorEmitterShape::valueEmitterPositionChanged);
-    QObject::connect(m_size, &FloatEdit::valueChanged, this, &NodeEditorEmitterShape::valueEmitterSizeChanged);
+    QObject::connect(m_shape,SIGNAL(currentIndexChanged(int)),this,SLOT(onValueEmitterShapeChanged(int)));
+    QObject::connect(m_position, &Vector2DEdit::valueChanged, this, &NodeEditorEmitterShape::onValueEmitterPositionChanged);
+    QObject::connect(m_size, &FloatEdit::valueChanged, this, &NodeEditorEmitterShape::onValueEmitterSizeChanged);
 }
 
 void NodeEditorEmitterShape::resetEditor()
@@ -35,17 +35,17 @@ void NodeEditorEmitterShape::resetEditor()
     m_size->setValue(0.0f);
 }
 
-void NodeEditorEmitterShape::valueEmitterShapeChanged(int value)
+void NodeEditorEmitterShape::onValueEmitterShapeChanged(int value)
 {
     emit nodeEditorWidgetChanged("Emitter Shape", value);
 }
 
-void NodeEditorEmitterShape::valueEmitterPositionChanged()
+void NodeEditorEmitterShape::onValueEmitterPositionChanged()
 {
     emit nodeEditorWidgetChanged("Emitter Position", m_position->value());
 }
 
-void NodeEditorEmitterShape::valueEmitterSizeChanged(float value)
+void NodeEditorEmitterShape::onValueEmitterSizeChanged(float value)
 {
     emit nodeEditorWidgetChanged("Emitter Size", value);
 }

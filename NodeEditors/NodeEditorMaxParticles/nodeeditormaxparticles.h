@@ -19,5 +19,5 @@ private:
     IntEdit *m_maxParticles;
 
 private slots:
-    void valueMaxParticlesChanged(int value);
+    void onValueMaxParticlesChanged(int value);
 };

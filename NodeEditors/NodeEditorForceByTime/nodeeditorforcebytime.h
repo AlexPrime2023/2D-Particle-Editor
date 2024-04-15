@@ -21,10 +21,10 @@ public:
     void deserialize(const QJsonObject& object) override;
 
 private slots:
-    void valueChanged();
-    void useCurveCheckBoxChanged(bool isUseCurve);
+    void onValueChanged();
+    void onUseCurveCheckBoxChanged(bool isUseCurve);
 
-    void curveEditorButtonPressed();
+    void onCurveEditorButtonPressed();
 
 private:
     Vector2DEdit *m_forceByTimeEdit;

@@ -17,7 +17,7 @@ void NodeEditorTrailType::resetEditor()
     m_trailType->setCurrentIndex(0);
 }
 
-void NodeEditorTrailType::trailTypeChanged(int value)
+void NodeEditorTrailType::onTrailTypeChanged(int value)
 {
     emit nodeEditorWidgetChanged("Trail Type", value);
 }

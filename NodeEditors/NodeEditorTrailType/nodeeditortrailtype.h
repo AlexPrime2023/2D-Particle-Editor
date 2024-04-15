@@ -16,7 +16,7 @@ public:
     void deserialize(const QJsonObject& object) override;
 
 private slots:
-    void trailTypeChanged(int value);
+    void onTrailTypeChanged(int value);
 
 private:
     QComboBox *m_trailType;

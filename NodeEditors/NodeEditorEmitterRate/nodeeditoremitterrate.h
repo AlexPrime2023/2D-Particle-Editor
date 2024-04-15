@@ -16,7 +16,7 @@ public:
     void deserialize(const QJsonObject& object) override;
 
 private slots:
-    void valueChanged(int value);
+    void onValueChanged(int value);
 
 private:
     IntEdit *m_intEdit;

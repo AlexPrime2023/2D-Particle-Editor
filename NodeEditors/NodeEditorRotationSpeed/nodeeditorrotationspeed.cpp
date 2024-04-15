@@ -14,8 +14,8 @@ NodeEditorRotationSpeed::NodeEditorRotationSpeed(QWidget *parent) :
     m_randomRotationSpeed->setRange(-50.0f, 50.0f);
     addItem(QString("Particle Rotation Speed Random Range:"), m_randomRotationSpeed);
 
-    QObject::connect(m_rotationSpeed, &FloatEdit::valueChanged, this, &NodeEditorRotationSpeed::valueFloatEditChanged);
-    QObject::connect(m_randomRotationSpeed, &RandomFloatEdit::valueChanged, this, &NodeEditorRotationSpeed::valueFloatRandomEditChanged);
+    QObject::connect(m_rotationSpeed, &FloatEdit::valueChanged, this, &NodeEditorRotationSpeed::onValueFloatEditChanged);
+    QObject::connect(m_randomRotationSpeed, &RandomFloatEdit::valueChanged, this, &NodeEditorRotationSpeed::onValueFloatRandomEditChanged);
 }
 
 void NodeEditorRotationSpeed::resetEditor()
@@ -27,12 +27,12 @@ void NodeEditorRotationSpeed::resetEditor()
     m_randomRotationSpeed->setValue(0.0f);
 }
 
-void NodeEditorRotationSpeed::valueFloatEditChanged(float value)
+void NodeEditorRotationSpeed::onValueFloatEditChanged(float value)
 {
     emit nodeEditorWidgetChanged("Particle Speed", value);
 }
 
-void NodeEditorRotationSpeed::valueFloatRandomEditChanged(float value)
+void NodeEditorRotationSpeed::onValueFloatRandomEditChanged(float value)
 {
     m_rotationSpeed->setValue(value);
 }
