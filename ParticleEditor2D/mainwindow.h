@@ -49,7 +49,6 @@ private:
     ContextNavigation3D *m_contextNavigation3D;
 
 private:
-    QHash<QString, int> m_nodesAndIds;
     QHash<int, NodeEditor*> m_nodeEditors;
 
     int m_prevSelectedNodeId;

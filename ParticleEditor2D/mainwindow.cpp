@@ -20,26 +20,26 @@
 #include "glgrid.h"
 #include "gltranslatehelper.h"
 
+#include "nodecontainer.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : m_prevSelectedNodeId(-1),
     QMainWindow(parent)
 {
-    m_nodesAndIds =
-        {
-            {"Life Time", 1},
-            {"Emittions Rate", 2},
-            {"Start Transformation", 3},
-            {"Max Prticles", 4},
-            {"Emitter Shape", 5},
-            {"Force By Time", 6},
-            {"Particle Speed", 7},
-            {"Particle Rotation Speed", 8},
-            {"Particle Size", 9},
-            {"Particle Color", 10},
-            {"Particle Trace", 11}
-        };
-
     setWindowTitle(m_applicationName.arg(m_notNamedProjectName));
+
+    // Node Container
+    NodeContainer::AddNodeToContainer("Life Time", 1);
+    NodeContainer::AddNodeToContainer("Emittions Rate", 2);
+    NodeContainer::AddNodeToContainer("Start Transformation", 3);
+    NodeContainer::AddNodeToContainer("Max Prticles", 4);
+    NodeContainer::AddNodeToContainer("Emitter Shape", 5);
+    NodeContainer::AddNodeToContainer("Force By Time", 6);
+    NodeContainer::AddNodeToContainer("Particle Speed", 7);
+    NodeContainer::AddNodeToContainer("Particle Rotation Speed", 8);
+    NodeContainer::AddNodeToContainer("Particle Size", 9);
+    NodeContainer::AddNodeToContainer("Particle Color", 10);
+    NodeContainer::AddNodeToContainer("Particle Trace", 11);
 
     // Central Widget
     m_centralWidget = new QWidget();
@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_centralWidget->setLayout(m_centralLayout);
 
     // Node Viewer
-    m_nodeViewer = new NodeViewer(m_nodesAndIds);
+    m_nodeViewer = new NodeViewer(NodeContainer::nodesAndIds());
     m_centralLayout->addWidget(m_nodeViewer);
 
     // 3D Framework
@@ -149,9 +149,9 @@ Viewport3D* MainWindow::createViewport()
 
 void MainWindow::createNodeEditors()
 {
-    foreach(const QString &name, m_nodesAndIds.keys())
+    foreach(const QString &name, NodeContainer::nodesAndIds().keys())
     {
-        const int nodeId = m_nodesAndIds[name];
+        const int nodeId = NodeContainer::nodesAndIds()[name];
 
         NodeEditor *m_editor = NodeEditorFactory::create(nodeId);
 

@@ -20,6 +20,7 @@ include($$PWD/../Framework/Utils/PathFileUtils/PathFileUtils.pri)
 
 include($$PWD/../Framework/NodeEditors/NodeEditor/NodeEditor.pri)
 include($$PWD/../Framework/NodeViewer/NodeViewer.pri)
+include($$PWD/../Framework/NodeContainer/NodeContainer.pri)
 
 SOURCES += \
     main.cpp \
