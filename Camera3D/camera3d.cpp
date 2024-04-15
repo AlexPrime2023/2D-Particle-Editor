@@ -40,8 +40,8 @@ void Camera3D::setFar(float far)
 
 QPointF Camera3D::screenPointToNormScreenPoint(const QPoint &screenPoint, const QSize &screenSize) const
 {
-    const float xNorm = 2 * (screenPoint.x() + 0.5f) / float(screenSize.width()) - 1;
-    const float yNorm = (1 - (screenPoint.y() + 0.5f) / float(screenSize.height())) * 2 - 1;
+    const float xNorm = 2.0f * (screenPoint.x() + 0.5f) / static_cast<float>(screenSize.width()) - 1.0f;
+    const float yNorm = (1.0f - (screenPoint.y() + 0.5f) / static_cast<float>(screenSize.height())) * 2.0f - 1.0f;
     return QPointF(xNorm, yNorm);
 }
 
@@ -62,7 +62,7 @@ QVector3D Camera3D::scale() const
 
 QMatrix4x4 Camera3D::projectionMatrix(const int width, const int height)
 {
-    const float aspectRatio = width / (float)(height ? height : 1);
+    const float aspectRatio = width / static_cast<float>(height ? height : 1);
 
     QMatrix4x4 projectionMatrix;
     projectionMatrix.setToIdentity();
