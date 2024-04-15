@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 #include <QVariant>
@@ -55,10 +54,10 @@ private:
 
     int m_prevSelectedNodeId;
 
+private:
     QString m_applicationName = "Particle Editor 2D (%1)";
-    QString m_notNamedProjectName = "untitled*";
+    QString m_notNamedProjectName = "untitled";
 
 private:
     NodeViewer *m_nodeViewer;
 };
-#endif // MAINWINDOW_H

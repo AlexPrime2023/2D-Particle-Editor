@@ -16,6 +16,7 @@ include($$PWD/../GLTranslateHelper/GLTranslateHelper.pri)
 include($$PWD/../NodeViewer/NodeViewer.pri)
 include($$PWD/../ISerializable/ISerializable.pri)
 include($$PWD/../JsonFileUtils/JsonFileUtils.pri)
+include($$PWD/../PathFileUtils/PathFileUtils.pri)
 include($$PWD/../NodeEditors/NodeEditor/NodeEditor.pri)
 
 SOURCES += \

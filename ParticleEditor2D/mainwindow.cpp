@@ -8,6 +8,7 @@
 #include <QFileDialog>
 
 #include "jsonfileutils.h"
+#include "pathfileutils.h"
 
 #include "camera3d.h"
 #include "viewport3d.h"
@@ -174,6 +175,13 @@ void MainWindow::connectSignalsAndSlots()
 
 void MainWindow::saveToFile()
 {
+    QString filePath = PathFileUtils::filePathDialog("Save file", QFileDialog::AcceptSave, "JSON Files (*.json)", QString("%1.json").arg(m_notNamedProjectName));
+
+    if (filePath.isEmpty())
+        return;
+
+    setWindowTitle(m_applicationName.arg(filePath));
+
     QJsonObject nodeViewerStates = m_nodeViewer->serialize();
 
     QJsonObject nodeEditorsStates;
@@ -184,24 +192,32 @@ void MainWindow::saveToFile()
     resultObject["node_viewer"] = nodeViewerStates;
     resultObject["node_editors"] = nodeEditorsStates;
 
-    QString filePath = "D:/output.json";
-
     QString message;
     bool isSaveSuccessfully = JsonFileUtils::isSaveJsonObjectSuccessfully(resultObject, filePath, message);
+
+    QMessageBox::information(nullptr, isSaveSuccessfully ? "Info" : "Error", message);
 }
 
 void MainWindow::loadFromFile()
 {
-    QString filePath = "D:/output.json";
+    QString filePath = PathFileUtils::filePathDialog("Save file", QFileDialog::AcceptOpen, "JSON Files (*.json)");
+
+    if (filePath.isEmpty())
+        return;
+
     QJsonObject loadedJsonObject;
     QString message;
     bool isReadSuccessfully = JsonFileUtils::isReadJsonObjectFromFileSuccessfully(filePath, loadedJsonObject, message);
 
-    if (!isReadSuccessfully)
-        return;
+    QMessageBox::information(nullptr, isReadSuccessfully ? "Info" : "Error", message);
 
     QJsonObject nodeViewerStates = loadedJsonObject["node_viewer"].toObject();
     QJsonObject nodeEditorsStates = loadedJsonObject["node_editors"].toObject();
+
+    if (nodeViewerStates.isEmpty() || nodeEditorsStates.isEmpty()) {
+        QMessageBox::warning(nullptr, "Error", "Wrong project format!");
+        return;
+    }
 
     m_nodeViewer->deserialize(nodeViewerStates);
 
@@ -213,4 +229,6 @@ void MainWindow::loadFromFile()
         if (m_nodeEditors.contains(nodeId) && m_nodeEditors[nodeId])
             m_nodeEditors[nodeId]->deserialize(object);
     }
+
+    setWindowTitle(m_applicationName.arg(filePath));
 }
