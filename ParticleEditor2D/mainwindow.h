@@ -41,9 +41,6 @@ private:
     QMenuBar* createTopMenu();
     void createNodeEditors();
 
-    void saveJsonObject(const QJsonObject& jsonObject, const QString& filePath);
-    QJsonObject readJsonObjectFromFile(const QString& filePath);
-
 private:
     Camera3D *m_camera3D;
     Viewport3D *m_viewport3D;

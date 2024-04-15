@@ -4,6 +4,10 @@
 #include <QMenuBar>
 #include <QJsonDocument>
 
+#include <QMessageBox>
+
+#include "jsonfileutils.h"
+
 #include "camera3d.h"
 #include "viewport3d.h"
 #include "contextnavigation3d.h"
@@ -174,16 +178,23 @@ void MainWindow::saveToFile()
     resultObject["node_editors"] = nodeEditorsStates;
 
     QString filePath = "D:/output.json";
-    saveJsonObject(resultObject, filePath);
+
+    QString message;
+    bool isSaveSuccessfully = JsonFileUtils::isSaveJsonObjectSuccessfully(resultObject, filePath, message);
 }
 
 void MainWindow::loadFromFile()
 {
     QString filePath = "D:/output.json";
-    QJsonObject resultObject = readJsonObjectFromFile(filePath);
+    QJsonObject loadedJsonObject;
+    QString message;
+    bool isReadSuccessfully = JsonFileUtils::isReadJsonObjectFromFileSuccessfully(filePath, loadedJsonObject, message);
 
-    QJsonObject nodeViewerStates = resultObject["node_viewer"].toObject();
-    QJsonObject nodeEditorsStates = resultObject["node_editors"].toObject();
+    if (!isReadSuccessfully)
+        return;
+
+    QJsonObject nodeViewerStates = loadedJsonObject["node_viewer"].toObject();
+    QJsonObject nodeEditorsStates = loadedJsonObject["node_editors"].toObject();
 
     m_nodeViewer->deserialize(nodeViewerStates);
 
@@ -195,41 +206,4 @@ void MainWindow::loadFromFile()
         if (m_nodeEditors.contains(nodeId) && m_nodeEditors[nodeId])
             m_nodeEditors[nodeId]->deserialize(object);
     }
-}
-
-// TODO to utils
-
-void MainWindow::saveJsonObject(const QJsonObject& jsonObject, const QString& filePath) {
-    QJsonDocument jsonDoc(jsonObject);
-    QFile file(filePath);
-    if (!file.open(QIODevice::WriteOnly)) {
-        qDebug() << "Failed to open file for writing: " << filePath;
-        return;
-    }
-    file.write(jsonDoc.toJson());
-    file.close();
-    qDebug() << "JSON object saved to file: " << filePath;
-}
-
-QJsonObject MainWindow::readJsonObjectFromFile(const QString& filePath) {
-    QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly)) {
-        qDebug() << "Failed to open file for reading: " << filePath;
-        return QJsonObject();
-    }
-
-    QByteArray jsonData = file.readAll();
-    QJsonParseError error;
-    QJsonDocument jsonDoc = QJsonDocument::fromJson(jsonData, &error);
-    if (jsonDoc.isNull()) {
-        qDebug() << "Failed to parse JSON data: " << error.errorString();
-        return QJsonObject();
-    }
-
-    if (!jsonDoc.isObject()) {
-        qDebug() << "JSON data is not an object";
-        return QJsonObject();
-    }
-
-    return jsonDoc.object();
 }
