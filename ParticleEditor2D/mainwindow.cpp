@@ -16,13 +16,12 @@
 #include "nodeeditorfactory.h"
 
 #include "glgrid.h"
+#include "gltranslatehelper.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : m_prevSelectedNodeId(-1),
     QMainWindow(parent)
 {
-    resize(1280, 720);
-
     m_nodesAndIds =
         {
             {"Life Time", 1},
@@ -54,8 +53,13 @@ MainWindow::MainWindow(QWidget *parent)
     m_centralLayout->addWidget(m_nodeViewer);
 
     // 3D stuff
-    m_camera3D = new Camera3D(QVector3D(0.0f, 0.0f, 0.0f), 45.0f);
+    m_camera3D = new Camera3D(QVector3D(0.0f, 0.0f, -50.0f), 45.0f);
+    m_camera3D->setRotation(QVector3D(0.5f, -90.0f, -24.0f));
+
     m_viewport3D = new Viewport3D(m_camera3D);
+    m_viewport3D->addObject(new GLGrid(20, 5.0f));
+    m_viewport3D->addObject(new GLTranslateHelper(m_camera3D));
+
     m_contextNavigation3D = new ContextNavigation3D(m_viewport3D, m_camera3D);
     m_centralLayout->addWidget(m_viewport3D, 1);
 
