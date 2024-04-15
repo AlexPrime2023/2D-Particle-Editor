@@ -84,5 +84,5 @@ void GLGrid::initialize()
     m_indexBuffer.allocate(m_indices.constData(), m_indices.size() * sizeof(int));
     m_indexBuffer.release();
 
-    m_shader = makeShaderProgramFromSourceFile("D:/Work/QtParticleEditor/GLGrid/gridVertexShader.vsh", "D:/Work/QtParticleEditor/GLGrid/gridFragmentShader.fsh");
+    m_shader = makeShaderProgramFromSourceFile(":/gridVertexShader.vsh", ":/gridFragmentShader.fsh");
 }
