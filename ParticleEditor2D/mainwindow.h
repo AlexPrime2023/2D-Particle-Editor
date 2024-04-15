@@ -55,7 +55,8 @@ private:
 
     int m_prevSelectedNodeId;
 
-    QString m_projectName = "Particle Editor 2D (%1)";
+    QString m_applicationName = "Particle Editor 2D (%1)";
+    QString m_notNamedProjectName = "untitled*";
 
 private:
     NodeViewer *m_nodeViewer;

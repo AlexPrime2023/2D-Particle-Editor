@@ -5,6 +5,7 @@
 #include <QJsonDocument>
 
 #include <QMessageBox>
+#include <QFileDialog>
 
 #include "jsonfileutils.h"
 
@@ -37,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
             {"Particle Trace", 11}
         };
 
-    setWindowTitle(m_projectName.arg("untitled*"));
+    setWindowTitle(m_applicationName.arg(m_notNamedProjectName));
 
     // Central Widget
     m_centralWidget = new QWidget();
@@ -115,10 +116,16 @@ QMenuBar* MainWindow::createTopMenu()
     QMenu *fileMenu = menuBar->addMenu(tr("File"));
 
     QAction *saveAction = new QAction(tr("Save"), this);
+    saveAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_S));
     fileMenu->addAction(saveAction);
 
     QAction *loadAction = new QAction(tr("Load"), this);
+    loadAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_O));
     fileMenu->addAction(loadAction);
+
+    QMenu *aboutMenu = menuBar->addMenu(tr("Window"));
+    QAction *aboutAction = new QAction(tr("About"), this);
+    aboutMenu->addAction(aboutAction);
 
     QObject::connect(saveAction, &QAction::triggered, this, &MainWindow::saveToFile);
     QObject::connect(loadAction, &QAction::triggered, this, &MainWindow::loadFromFile);
