@@ -11,6 +11,7 @@ class NodeEditor : public QWidget, public ISerializable
 {
     Q_OBJECT
 public:
+    virtual ~NodeEditor() {}
     virtual void resetEditor() = 0;
 
 signals:

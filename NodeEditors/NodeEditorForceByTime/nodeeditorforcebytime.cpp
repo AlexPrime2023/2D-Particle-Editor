@@ -2,6 +2,7 @@
 
 #include "../Vector2DEdit/vector2dedit.h"
 #include "stringutils.h"
+#include "curveeditordialog.h"
 
 #include <QPushButton>
 #include <QVector2D>
@@ -21,8 +22,17 @@ NodeEditorForceByTime::NodeEditorForceByTime(QWidget *parent) :
     m_openCurveEditor = new QPushButton("Open Curve Editor");
     addItem(QString("Curve Editor:"), m_openCurveEditor);
 
+    m_curveEditorDialog = new CurveEditorDialog();
+
     QObject::connect(m_forceByTimeEdit, &Vector2DEdit::valueChanged, this, &NodeEditorForceByTime::valueChanged);
     QObject::connect(m_isUseCurve, &QCheckBox::clicked, this, &NodeEditorForceByTime::useCurveCheckBoxChanged);
+    QObject::connect(m_openCurveEditor, &QPushButton::pressed, this, &NodeEditorForceByTime::curveEditorButtonPressed);
+}
+
+NodeEditorForceByTime::~NodeEditorForceByTime()
+{
+    delete m_curveEditorDialog;
+    m_curveEditorDialog = nullptr;
 }
 
 void NodeEditorForceByTime::valueChanged()
@@ -36,9 +46,15 @@ void NodeEditorForceByTime::useCurveCheckBoxChanged(bool isUseCurve)
     emit nodeEditorWidgetChanged("Force By Time (curve)", QPointF());
 }
 
+void NodeEditorForceByTime::curveEditorButtonPressed()
+{
+    m_curveEditorDialog->show();
+}
+
 void NodeEditorForceByTime::resetEditor()
 {
     m_forceByTimeEdit->setValue(QVector2D(0.0f, 0.0f));
+    m_curveEditorDialog->reset();
 }
 
 QJsonObject NodeEditorForceByTime::serialize() const

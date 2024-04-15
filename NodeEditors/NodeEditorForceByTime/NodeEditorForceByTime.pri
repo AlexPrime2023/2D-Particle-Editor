@@ -7,6 +7,8 @@ INCLUDEPATH += $$PWD
 include($$PWD/../../Vector2DEdit/Vector2DEdit.pri)
 include($$PWD/../../StringUtils/StringUtils.pri)
 
+include($$PWD/../../CurveEditorDialog/CurveEditorDialog.pri)
+
 HEADERS += \
     $$PWD/nodeeditorforcebytime.h
 

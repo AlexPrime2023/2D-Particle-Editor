@@ -1,5 +1,7 @@
 #include "nodeeditorparticlesizebytime.h"
 
+#include "curveeditordialog.h"
+
 #include <QPushButton>
 #include <QPalette>
 
@@ -8,10 +10,26 @@ NodeEditorParticleSizeByTime::NodeEditorParticleSizeByTime(QWidget *parent) :
 {
     m_openCurveEditor = new QPushButton("Curve Editor");
     addItem(QString("Curve Editor:"), m_openCurveEditor);
+
+    m_curveEditorDialog = new CurveEditorDialog();
+
+    QObject::connect(m_openCurveEditor, &QPushButton::pressed, this, &NodeEditorParticleSizeByTime::curveEditorButtonPressed);
+}
+
+NodeEditorParticleSizeByTime::~NodeEditorParticleSizeByTime()
+{
+    delete m_curveEditorDialog;
+    m_curveEditorDialog = nullptr;
+}
+
+void NodeEditorParticleSizeByTime::curveEditorButtonPressed()
+{
+    m_curveEditorDialog->show();
 }
 
 void NodeEditorParticleSizeByTime::resetEditor()
 {
+    m_curveEditorDialog->reset();
 }
 
 QJsonObject NodeEditorParticleSizeByTime::serialize() const

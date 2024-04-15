@@ -5,12 +5,14 @@
 class QPushButton;
 class QColorDialog;
 class QColor;
+class CurveEditorDialog;
 
 class NodeEditorParticleColor : public NodeEditor
 {
     Q_OBJECT
 public:
     explicit NodeEditorParticleColor(QWidget *parent = nullptr);
+    ~NodeEditorParticleColor();
     void resetEditor() override;
 
 public:
@@ -30,10 +32,16 @@ private:
     QColor m_startColor;
     QColor m_endColor;
 
+    CurveEditorDialog *m_curveEditorDialogRGB;
+    CurveEditorDialog *m_curveEditorDialogAlpha;
+
 private slots:
     void startColorChanged(const QColor &color);
     void endColorChanged(const QColor &color);
 
     void startColorButtonPressed();
     void endColorButtonPressed();
+
+    void curveEditorRGBButtonPressed();
+    void curveEditorAlphaButtonPressed();
 };

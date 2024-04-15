@@ -1,5 +1,7 @@
 #include "nodeeditorparticlecolor.h"
 
+#include "curveeditordialog.h"
+
 #include <QPushButton>
 #include <QPalette>
 
@@ -25,11 +27,36 @@ NodeEditorParticleColor::NodeEditorParticleColor(QWidget *parent) :
     m_startColorDialog = new QColorDialog();
     m_endColorDialog = new QColorDialog();
 
+    m_curveEditorDialogRGB = new CurveEditorDialog();
+    m_curveEditorDialogAlpha = new CurveEditorDialog();
+
     QObject::connect(m_startColorButton, &QPushButton::clicked, this, &NodeEditorParticleColor::startColorButtonPressed);
     QObject::connect(m_endColorButton, &QPushButton::clicked, this, &NodeEditorParticleColor::endColorButtonPressed);
 
     QObject::connect(m_startColorDialog, &QColorDialog::colorSelected, this, &NodeEditorParticleColor::startColorChanged);
     QObject::connect(m_endColorDialog, &QColorDialog::colorSelected, this, &NodeEditorParticleColor::endColorChanged);
+
+    QObject::connect(m_rgbCurveEditor, &QPushButton::pressed, this, &NodeEditorParticleColor::curveEditorRGBButtonPressed);
+    QObject::connect(m_alphaCurveEditor, &QPushButton::pressed, this, &NodeEditorParticleColor::curveEditorAlphaButtonPressed);
+}
+
+NodeEditorParticleColor::~NodeEditorParticleColor()
+{
+    delete m_curveEditorDialogRGB;
+    m_curveEditorDialogRGB = nullptr;
+
+    delete m_curveEditorDialogAlpha;
+    m_curveEditorDialogAlpha = nullptr;
+}
+
+void NodeEditorParticleColor::curveEditorRGBButtonPressed()
+{
+    m_curveEditorDialogRGB->show();
+}
+
+void NodeEditorParticleColor::curveEditorAlphaButtonPressed()
+{
+    m_curveEditorDialogAlpha->show();
 }
 
 void NodeEditorParticleColor::resetEditor()

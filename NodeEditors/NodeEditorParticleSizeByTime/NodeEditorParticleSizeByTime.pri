@@ -4,6 +4,8 @@ CONFIG += NODE_EDITOR_PARTICLE_SIZE_BY_TIME_PRI
 
 INCLUDEPATH += $$PWD
 
+include($$PWD/../../CurveEditorDialog/CurveEditorDialog.pri)
+
 HEADERS += \
     $$PWD/nodeeditorparticlesizebytime.h
 
