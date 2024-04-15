@@ -36,3 +36,17 @@ void NodeEditorParticleSpeed::valueFloatRandomEditChanged(float value)
 {
     m_particleSpeed->setValue(value);
 }
+
+QJsonObject NodeEditorParticleSpeed::serialize() const
+{
+    QJsonObject obj;
+    obj["particle_speed"] = m_particleSpeed->value();
+    return obj;
+}
+
+void NodeEditorParticleSpeed::deserialize(const QJsonObject& object)
+{
+    if (!object["particle_speed"].isNull())
+        m_particleSpeed->setValue(object["particle_speed"].toDouble());
+}
+

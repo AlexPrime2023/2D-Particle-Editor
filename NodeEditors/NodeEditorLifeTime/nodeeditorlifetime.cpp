@@ -39,3 +39,15 @@ void NodeEditorLifeTime::valueFloatRandomEditChanged(float value)
     m_floatEdit->setValue(value);
 }
 
+QJsonObject NodeEditorLifeTime::serialize() const
+{
+    QJsonObject obj;
+    obj["life_time"] = m_floatEdit->value();
+    return obj;
+}
+
+void NodeEditorLifeTime::deserialize(const QJsonObject& object)
+{
+    if (!object["life_time"].isNull())
+        m_floatEdit->setValue(object["life_time"].toDouble());
+}

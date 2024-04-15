@@ -6,6 +6,7 @@ INCLUDEPATH += $$PWD
 
 include($$PWD/../../Vector2DEdit/Vector2DEdit.pri)
 include($$PWD/../../FloatEdit/FloatEdit.pri)
+include($$PWD/../../StringUtils/StringUtils.pri)
 
 HEADERS += \
     $$PWD/nodeeditoremittershape.h

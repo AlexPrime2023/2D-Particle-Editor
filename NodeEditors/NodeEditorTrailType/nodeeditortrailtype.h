@@ -12,6 +12,10 @@ public:
     explicit NodeEditorTrailType(QWidget *parent = nullptr);
     void resetEditor() override;
 
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
+
 private slots:
     void trailTypeChanged(int value);
 

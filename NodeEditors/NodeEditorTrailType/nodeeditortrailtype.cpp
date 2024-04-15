@@ -21,3 +21,16 @@ void NodeEditorTrailType::trailTypeChanged(int value)
 {
     emit nodeEditorWidgetChanged("Trail Type", value);
 }
+
+QJsonObject NodeEditorTrailType::serialize() const
+{
+    QJsonObject obj;
+    obj["trail_type"] = m_trailType->currentIndex();
+    return obj;
+}
+
+void NodeEditorTrailType::deserialize(const QJsonObject& object)
+{
+    if (!object["trail_type"].isNull())
+        m_trailType->setCurrentIndex(object["trail_type"].toInt());
+}

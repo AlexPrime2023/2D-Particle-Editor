@@ -1,6 +1,7 @@
 #include "nodeeditorforcebytime.h"
 
 #include "../Vector2DEdit/vector2dedit.h"
+#include "stringutils.h"
 
 #include <QPushButton>
 #include <QVector2D>
@@ -38,4 +39,17 @@ void NodeEditorForceByTime::useCurveCheckBoxChanged(bool isUseCurve)
 void NodeEditorForceByTime::resetEditor()
 {
     m_forceByTimeEdit->setValue(QVector2D(0.0f, 0.0f));
+}
+
+QJsonObject NodeEditorForceByTime::serialize() const
+{
+    QJsonObject obj;
+    obj["force_by_time"] = StringUtils::QVector2DToQString(m_forceByTimeEdit->value());
+    return obj;
+}
+
+void NodeEditorForceByTime::deserialize(const QJsonObject& object)
+{
+    if (!object["force_by_time"].isNull())
+        return m_forceByTimeEdit->setValue(StringUtils::QStringToQVector2D(object["force_by_time"].toString()));
 }

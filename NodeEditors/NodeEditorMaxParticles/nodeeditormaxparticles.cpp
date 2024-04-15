@@ -23,3 +23,16 @@ void NodeEditorMaxParticles::valueMaxParticlesChanged(int value)
 {
     emit nodeEditorWidgetChanged("Max Particles", value);
 }
+
+QJsonObject NodeEditorMaxParticles::serialize() const
+{
+    QJsonObject obj;
+    obj["max_particles"] = m_maxParticles->value();
+    return obj;
+}
+
+void NodeEditorMaxParticles::deserialize(const QJsonObject& object)
+{
+    if (!object["max_particles"].isNull())
+        m_maxParticles->setValue(object["max_particles"].toInt());
+}

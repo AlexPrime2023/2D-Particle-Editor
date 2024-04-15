@@ -22,3 +22,16 @@ void NodeEditorEmitterRate::resetEditor()
     m_intEdit->setRange(0, 150);
     m_intEdit->setValue(0);
 }
+
+QJsonObject NodeEditorEmitterRate::serialize() const
+{
+    QJsonObject obj;
+    obj["emitter_rate"] = m_intEdit->value();
+    return obj;
+}
+
+void NodeEditorEmitterRate::deserialize(const QJsonObject& object)
+{
+    if (!object["emitter_rate"].isNull())
+        m_intEdit->setValue(object["emitter_rate"].toInt());
+}

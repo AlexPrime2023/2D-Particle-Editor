@@ -2,6 +2,7 @@
 
 #include "../Vector2DEdit/vector2dedit.h"
 #include "../FloatEdit/floatedit.h"
+#include "stringutils.h"
 
 #include <QVector2D>
 
@@ -46,4 +47,25 @@ void NodeEditorStartTransformation::valueRotationChanged(float value)
 void NodeEditorStartTransformation::valueSizeChanged(float value)
 {
     emit nodeEditorWidgetChanged("Scale", value);
+}
+
+QJsonObject NodeEditorStartTransformation::serialize() const
+{
+    QJsonObject obj;
+    obj["velocity"] = StringUtils::QVector2DToQString(m_velocity->value());
+    obj["rotation"] = m_rotation->value();
+    obj["scale"] = m_size->value();
+    return obj;
+}
+
+void NodeEditorStartTransformation::deserialize(const QJsonObject& object)
+{
+    if (!object["velocity"].isNull())
+        m_velocity->setValue(StringUtils::QStringToQVector2D(object["velocity"].toString()));
+
+    if (!object["rotation"].isNull())
+        m_rotation->setValue(object["rotation"].toDouble());
+
+    if (!object["scale"].isNull())
+        m_size->setValue(object["scale"].toDouble());
 }

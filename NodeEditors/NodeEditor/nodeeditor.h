@@ -4,9 +4,11 @@
 #include <QWidget>
 #include <QVariant>
 
+#include "iserializable.h"
+
 class QFormLayout;
 
-class NodeEditor : public QWidget
+class NodeEditor : public QWidget, public ISerializable
 {
     Q_OBJECT
 public:

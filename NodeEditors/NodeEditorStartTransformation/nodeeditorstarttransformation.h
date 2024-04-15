@@ -14,6 +14,10 @@ public:
     explicit NodeEditorStartTransformation(QWidget *parent = nullptr);
     void resetEditor() override;
 
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
+
 private:
     Vector2DEdit *m_velocity;
     FloatEdit *m_rotation;

@@ -8,11 +8,11 @@ NodeEditorRotationSpeed::NodeEditorRotationSpeed(QWidget *parent) :
 {
     m_rotationSpeed = new FloatEdit();
     m_rotationSpeed->setRange(-50.0f, 50.0f);
-    addItem(QString("Particle Speed:"), m_rotationSpeed);
+    addItem(QString("Rotation Speed:"), m_rotationSpeed);
 
     m_randomRotationSpeed = new RandomFloatEdit();
     m_randomRotationSpeed->setRange(-50.0f, 50.0f);
-    addItem(QString("Particle Speed Random Range:"), m_randomRotationSpeed);
+    addItem(QString("Particle Rotation Speed Random Range:"), m_randomRotationSpeed);
 
     QObject::connect(m_rotationSpeed, &FloatEdit::valueChanged, this, &NodeEditorRotationSpeed::valueFloatEditChanged);
     QObject::connect(m_randomRotationSpeed, &RandomFloatEdit::valueChanged, this, &NodeEditorRotationSpeed::valueFloatRandomEditChanged);
@@ -35,4 +35,17 @@ void NodeEditorRotationSpeed::valueFloatEditChanged(float value)
 void NodeEditorRotationSpeed::valueFloatRandomEditChanged(float value)
 {
     m_rotationSpeed->setValue(value);
+}
+
+QJsonObject NodeEditorRotationSpeed::serialize() const
+{
+    QJsonObject obj;
+    obj["rotation_speed"] = m_rotationSpeed->value();
+    return obj;
+}
+
+void NodeEditorRotationSpeed::deserialize(const QJsonObject& object)
+{
+    if (!object["rotation_speed"].isNull())
+        m_rotationSpeed->setValue(object["rotation_speed"].toDouble());
 }

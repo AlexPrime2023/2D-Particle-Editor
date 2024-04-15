@@ -4,6 +4,8 @@ CONFIG += NODE_EDITOR_PRI
 
 INCLUDEPATH += $$PWD
 
+include($$PWD/../../ISerializable/ISerializable.pri)
+
 include($$PWD/../NodeEditorLifeTime/NodeEditorLifeTime.pri)
 include($$PWD/../NodeEditorEmitterRate/NodeEditorEmitterRate.pri)
 include($$PWD/../NodeEditorStartTransformation/NodeEditorStartTransformation.pri)

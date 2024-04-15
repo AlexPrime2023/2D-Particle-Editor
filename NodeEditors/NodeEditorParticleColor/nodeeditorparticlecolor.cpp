@@ -61,3 +61,20 @@ void NodeEditorParticleColor::endColorButtonPressed()
 {
     m_endColorDialog->show();
 }
+
+QJsonObject NodeEditorParticleColor::serialize() const
+{
+    QJsonObject obj;
+    obj["start_color"] = m_startColorDialog->currentColor().name();
+    obj["end_color"] = m_endColorDialog->currentColor().name();
+    return obj;
+}
+
+void NodeEditorParticleColor::deserialize(const QJsonObject& object)
+{
+    if (!object["start_color"].isNull())
+        startColorChanged(QColor(object["start_color"].toString()));
+
+    if (!object["end_color"].isNull())
+        endColorChanged(QColor(object["end_color"].toString()));
+}

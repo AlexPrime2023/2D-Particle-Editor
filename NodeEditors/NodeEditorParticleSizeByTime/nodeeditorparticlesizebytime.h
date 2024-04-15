@@ -12,6 +12,10 @@ public:
     explicit NodeEditorParticleSizeByTime(QWidget *parent = nullptr);
     void resetEditor() override;
 
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
+
 private:
     QPushButton *m_openCurveEditor;
 };

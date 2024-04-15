@@ -4,6 +4,7 @@
 
 #include "../FloatEdit/floatedit.h"
 #include "../Vector2DEdit/vector2dedit.h"
+#include "stringutils.h"
 #include <QVector2D>
 
 NodeEditorEmitterShape::NodeEditorEmitterShape(QWidget *parent) :
@@ -47,4 +48,25 @@ void NodeEditorEmitterShape::valueEmitterPositionChanged()
 void NodeEditorEmitterShape::valueEmitterSizeChanged(float value)
 {
     emit nodeEditorWidgetChanged("Emitter Size", value);
+}
+
+QJsonObject NodeEditorEmitterShape::serialize() const
+{
+    QJsonObject obj;
+    obj["emitter_shape"] = m_shape->currentIndex();
+    obj["emitter_position"] = StringUtils::QVector2DToQString(m_position->value());
+    obj["emitter_size"] = m_size->value();
+    return obj;
+}
+
+void NodeEditorEmitterShape::deserialize(const QJsonObject& object)
+{
+    if (!object["emitter_shape"].isNull())
+        m_shape->setCurrentIndex(object["emitter_shape"].toInt());
+
+    if (!object["emitter_position"].isNull())
+        m_position->setValue(StringUtils::QStringToQVector2D(object["emitter_position"].toString()));
+
+    if (!object["emitter_size"].isNull())
+        m_size->setValue(object["emitter_size"].toDouble());
 }

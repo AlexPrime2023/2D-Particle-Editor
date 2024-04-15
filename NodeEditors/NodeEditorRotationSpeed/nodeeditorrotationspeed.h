@@ -13,6 +13,10 @@ public:
     explicit NodeEditorRotationSpeed(QWidget *parent = nullptr);
     void resetEditor() override;
 
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
+
 private:
     FloatEdit *m_rotationSpeed;
     RandomFloatEdit *m_randomRotationSpeed;

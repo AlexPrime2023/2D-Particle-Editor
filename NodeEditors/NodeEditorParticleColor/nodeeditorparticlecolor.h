@@ -13,6 +13,10 @@ public:
     explicit NodeEditorParticleColor(QWidget *parent = nullptr);
     void resetEditor() override;
 
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
+
 private:
     QPushButton *m_startColorButton;
     QPushButton *m_endColorButton;

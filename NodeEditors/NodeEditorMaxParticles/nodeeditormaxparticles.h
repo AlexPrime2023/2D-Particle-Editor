@@ -12,6 +12,10 @@ public:
     explicit NodeEditorMaxParticles(QWidget *parent = nullptr);
     void resetEditor() override;
 
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
+
 private:
     IntEdit *m_maxParticles;
 

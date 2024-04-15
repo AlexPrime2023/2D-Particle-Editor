@@ -13,3 +13,12 @@ NodeEditorParticleSizeByTime::NodeEditorParticleSizeByTime(QWidget *parent) :
 void NodeEditorParticleSizeByTime::resetEditor()
 {
 }
+
+QJsonObject NodeEditorParticleSizeByTime::serialize() const
+{
+    return QJsonObject();
+}
+
+void NodeEditorParticleSizeByTime::deserialize(const QJsonObject& object)
+{
+}

@@ -15,6 +15,10 @@ public:
     explicit NodeEditorEmitterShape(QWidget *parent = nullptr);
     void resetEditor() override;
 
+public:
+    QJsonObject serialize() const override;
+    void deserialize(const QJsonObject& object) override;
+
 private:
     QComboBox *m_shape;
     Vector2DEdit *m_position;
