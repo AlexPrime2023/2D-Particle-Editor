@@ -4,10 +4,10 @@ CONFIG += NODE_EDITOR_FORCE_BY_TIME_PRI
 
 INCLUDEPATH += $$PWD
 
-include($$PWD/../../Vector2DEdit/Vector2DEdit.pri)
-include($$PWD/../../StringUtils/StringUtils.pri)
+include($$PWD/../../Widgets/Vector2DEdit/Vector2DEdit.pri)
+include($$PWD/../../Widgets/CurveEditorDialog/CurveEditorDialog.pri)
 
-include($$PWD/../../CurveEditorDialog/CurveEditorDialog.pri)
+include($$PWD/../../Utils/StringUtils/StringUtils.pri)
 
 HEADERS += \
     $$PWD/nodeeditorforcebytime.h

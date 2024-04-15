@@ -10,14 +10,16 @@ CONFIG += c++17
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-include($$PWD/../ContextNavigation3D/ContextNavigation3D.pri)
-include($$PWD/../GLGrid/GLGrid.pri)
-include($$PWD/../GLTranslateHelper/GLTranslateHelper.pri)
-include($$PWD/../NodeViewer/NodeViewer.pri)
-include($$PWD/../ISerializable/ISerializable.pri)
-include($$PWD/../JsonFileUtils/JsonFileUtils.pri)
-include($$PWD/../PathFileUtils/PathFileUtils.pri)
-include($$PWD/../NodeEditors/NodeEditor/NodeEditor.pri)
+include($$PWD/../Framework/3DFramework/ContextNavigation3D/ContextNavigation3D.pri)
+include($$PWD/../Framework/3DFramework/GLGrid/GLGrid.pri)
+include($$PWD/../Framework/3DFramework/GLTranslateHelper/GLTranslateHelper.pri)
+
+include($$PWD/../Framework/Utils/ISerializable/ISerializable.pri)
+include($$PWD/../Framework/Utils/JsonFileUtils/JsonFileUtils.pri)
+include($$PWD/../Framework/Utils/PathFileUtils/PathFileUtils.pri)
+
+include($$PWD/../Framework/NodeEditors/NodeEditor/NodeEditor.pri)
+include($$PWD/../Framework/NodeViewer/NodeViewer.pri)
 
 SOURCES += \
     main.cpp \

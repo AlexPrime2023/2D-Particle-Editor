@@ -9,7 +9,7 @@ NodeEditorTrailType::NodeEditorTrailType(QWidget *parent) :
     m_trailType->addItems({"None", "Trail", "Ribbon"});
     addItem(QString("Trail Type:"), m_trailType);
 
-    QObject::connect(m_trailType,SIGNAL(currentIndexChanged(int)),this,SLOT(trailTypeChanged(int)));
+    QObject::connect(m_trailType,SIGNAL(currentIndexChanged(int)),this,SLOT(onTrailTypeChanged(int)));
 }
 
 void NodeEditorTrailType::resetEditor()

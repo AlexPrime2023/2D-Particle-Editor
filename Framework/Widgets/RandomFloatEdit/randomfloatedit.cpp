@@ -16,7 +16,7 @@ RandomFloatEdit::RandomFloatEdit(QWidget *parent) :
         FloatEdit *edit = new FloatEdit();
         m_edits << edit;
         layout->addWidget(edit);
-        QObject::connect(edit,SIGNAL(valueChanged(float)),this,SLOT(locaValueChanged(float)));
+        QObject::connect(edit,SIGNAL(valueChanged(float)),this,SLOT(onLocaValueChanged(float)));
     }
 
     setLayout(layout);

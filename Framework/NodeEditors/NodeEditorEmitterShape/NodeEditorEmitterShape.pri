@@ -4,9 +4,10 @@ CONFIG += NODE_EDITOR_EMITTER_SHAPE_PRI
 
 INCLUDEPATH += $$PWD
 
-include($$PWD/../../Vector2DEdit/Vector2DEdit.pri)
-include($$PWD/../../FloatEdit/FloatEdit.pri)
-include($$PWD/../../StringUtils/StringUtils.pri)
+include($$PWD/../../Widgets/Vector2DEdit/Vector2DEdit.pri)
+include($$PWD/../../Widgets/FloatEdit/FloatEdit.pri)
+
+include($$PWD/../../Utils/StringUtils/StringUtils.pri)
 
 HEADERS += \
     $$PWD/nodeeditoremittershape.h

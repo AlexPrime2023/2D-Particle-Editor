@@ -53,7 +53,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_nodeViewer = new NodeViewer(m_nodesAndIds);
     m_centralLayout->addWidget(m_nodeViewer);
 
-    // 3D stuff
+    // 3D Framework
     m_centralLayout->addWidget(createViewport(), 1);
 
     // Node Editors
